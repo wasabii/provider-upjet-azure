@@ -87,7 +87,7 @@ type EnvironmentDaprComponentParameters struct {
 
 	// The ID of the Container App Managed Environment for this Dapr Component. Changing this forces a new resource to be created.
 	// The Container App Managed Environment ID to configure this Dapr component on.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/containerapp/v1beta1.Environment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/containerapp/v1beta1.Environment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ContainerAppEnvironmentID *string `json:"containerAppEnvironmentId,omitempty" tf:"container_app_environment_id,omitempty"`
@@ -131,10 +131,11 @@ type EnvironmentDaprComponentParameters struct {
 
 type EnvironmentDaprComponentSecretInitParameters struct {
 
+	// The identity to use for accessing key vault reference. Possible values are the Resource ID of a User Assigned Managed Identity, or System to use the System Assigned Managed Identity.
 	// The identity to use for accessing key vault reference.
 	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// The ID of the Container App Environment Dapr Component
+	// The Key Vault Secret ID.
 	// The Key Vault Secret ID. Could be either one of `id` or `versionless_id`.
 	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
 
@@ -149,10 +150,11 @@ type EnvironmentDaprComponentSecretInitParameters struct {
 
 type EnvironmentDaprComponentSecretObservation struct {
 
+	// The identity to use for accessing key vault reference. Possible values are the Resource ID of a User Assigned Managed Identity, or System to use the System Assigned Managed Identity.
 	// The identity to use for accessing key vault reference.
 	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// The ID of the Container App Environment Dapr Component
+	// The Key Vault Secret ID.
 	// The Key Vault Secret ID. Could be either one of `id` or `versionless_id`.
 	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
 
@@ -163,11 +165,12 @@ type EnvironmentDaprComponentSecretObservation struct {
 
 type EnvironmentDaprComponentSecretParameters struct {
 
+	// The identity to use for accessing key vault reference. Possible values are the Resource ID of a User Assigned Managed Identity, or System to use the System Assigned Managed Identity.
 	// The identity to use for accessing key vault reference.
 	// +kubebuilder:validation:Optional
 	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// The ID of the Container App Environment Dapr Component
+	// The Key Vault Secret ID.
 	// The Key Vault Secret ID. Could be either one of `id` or `versionless_id`.
 	// +kubebuilder:validation:Optional
 	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`

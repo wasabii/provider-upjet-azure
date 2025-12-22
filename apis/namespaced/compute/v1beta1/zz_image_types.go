@@ -101,7 +101,7 @@ type ImageInitParameters struct {
 	// One or more data_disk blocks as defined below.
 	DataDisk []DataDiskInitParameters `json:"dataDisk,omitempty" tf:"data_disk,omitempty"`
 
-	// The HyperVGenerationType of the VirtualMachine created from the image as V1, V2. Defaults to V1. Changing this forces a new resource to be created.
+	// The Hyper-V Generation Type of the Virtual Machine created from the image as V1, V2. Defaults to V1. Changing this forces a new resource to be created.
 	HyperVGeneration *string `json:"hyperVGeneration,omitempty" tf:"hyper_v_generation,omitempty"`
 
 	// Specified the supported Azure location where the resource exists. Changing this forces a new resource to be created.
@@ -126,7 +126,7 @@ type ImageObservation struct {
 	// One or more data_disk blocks as defined below.
 	DataDisk []DataDiskObservation `json:"dataDisk,omitempty" tf:"data_disk,omitempty"`
 
-	// The HyperVGenerationType of the VirtualMachine created from the image as V1, V2. Defaults to V1. Changing this forces a new resource to be created.
+	// The Hyper-V Generation Type of the Virtual Machine created from the image as V1, V2. Defaults to V1. Changing this forces a new resource to be created.
 	HyperVGeneration *string `json:"hyperVGeneration,omitempty" tf:"hyper_v_generation,omitempty"`
 
 	// The ID of the Image.
@@ -158,7 +158,7 @@ type ImageParameters struct {
 	// +kubebuilder:validation:Optional
 	DataDisk []DataDiskParameters `json:"dataDisk,omitempty" tf:"data_disk,omitempty"`
 
-	// The HyperVGenerationType of the VirtualMachine created from the image as V1, V2. Defaults to V1. Changing this forces a new resource to be created.
+	// The Hyper-V Generation Type of the Virtual Machine created from the image as V1, V2. Defaults to V1. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	HyperVGeneration *string `json:"hyperVGeneration,omitempty" tf:"hyper_v_generation,omitempty"`
 
@@ -171,7 +171,7 @@ type ImageParameters struct {
 	OsDisk *OsDiskParameters `json:"osDisk,omitempty" tf:"os_disk,omitempty"`
 
 	// The name of the resource group in which to create the image. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

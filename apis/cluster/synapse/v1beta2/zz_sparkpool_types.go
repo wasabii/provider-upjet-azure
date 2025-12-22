@@ -166,7 +166,7 @@ type SparkPoolInitParameters struct {
 	// The default folder where Spark logs will be written. Defaults to /logs.
 	SparkLogFolder *string `json:"sparkLogFolder,omitempty" tf:"spark_log_folder,omitempty"`
 
-	// The Apache Spark version. Possible values are 3.2, 3.3, and 3.4.
+	// The Apache Spark version. Possible values are 3.4 and 3.5.
 	SparkVersion *string `json:"sparkVersion,omitempty" tf:"spark_version,omitempty"`
 
 	// A mapping of tags which should be assigned to the Synapse Spark Pool.
@@ -224,7 +224,7 @@ type SparkPoolObservation struct {
 	// The default folder where Spark logs will be written. Defaults to /logs.
 	SparkLogFolder *string `json:"sparkLogFolder,omitempty" tf:"spark_log_folder,omitempty"`
 
-	// The Apache Spark version. Possible values are 3.2, 3.3, and 3.4.
+	// The Apache Spark version. Possible values are 3.4 and 3.5.
 	SparkVersion *string `json:"sparkVersion,omitempty" tf:"spark_version,omitempty"`
 
 	// The ID of the Synapse Workspace where the Synapse Spark Pool should exist. Changing this forces a new Synapse Spark Pool to be created.
@@ -297,12 +297,12 @@ type SparkPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	SparkLogFolder *string `json:"sparkLogFolder,omitempty" tf:"spark_log_folder,omitempty"`
 
-	// The Apache Spark version. Possible values are 3.2, 3.3, and 3.4.
+	// The Apache Spark version. Possible values are 3.4 and 3.5.
 	// +kubebuilder:validation:Optional
 	SparkVersion *string `json:"sparkVersion,omitempty" tf:"spark_version,omitempty"`
 
 	// The ID of the Synapse Workspace where the Synapse Spark Pool should exist. Changing this forces a new Synapse Spark Pool to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/synapse/v1beta2.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/synapse/v1beta2.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SynapseWorkspaceID *string `json:"synapseWorkspaceId,omitempty" tf:"synapse_workspace_id,omitempty"`

@@ -58,7 +58,7 @@ type DeploymentObservation struct {
 type DeploymentParameters struct {
 
 	// The ID of the Cognitive Services Account. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/cognitiveservices/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/cognitiveservices/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CognitiveAccountID *string `json:"cognitiveAccountId,omitempty" tf:"cognitive_account_id,omitempty"`
@@ -94,7 +94,7 @@ type DeploymentParameters struct {
 
 type ModelInitParameters struct {
 
-	// The format of the Cognitive Services Account Deployment model. Possible values are OpenAI and Cohere. Changing this forces a new resource to be created.
+	// The format of the Cognitive Services Account Deployment model. Changing this forces a new resource to be created.
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
 	// The name of the Cognitive Services Account Deployment model. Changing this forces a new resource to be created.
@@ -106,7 +106,7 @@ type ModelInitParameters struct {
 
 type ModelObservation struct {
 
-	// The format of the Cognitive Services Account Deployment model. Possible values are OpenAI and Cohere. Changing this forces a new resource to be created.
+	// The format of the Cognitive Services Account Deployment model. Changing this forces a new resource to be created.
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
 	// The name of the Cognitive Services Account Deployment model. Changing this forces a new resource to be created.
@@ -118,7 +118,7 @@ type ModelObservation struct {
 
 type ModelParameters struct {
 
-	// The format of the Cognitive Services Account Deployment model. Possible values are OpenAI and Cohere. Changing this forces a new resource to be created.
+	// The format of the Cognitive Services Account Deployment model. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Format *string `json:"format" tf:"format,omitempty"`
 
@@ -139,7 +139,7 @@ type SkuInitParameters struct {
 	// If the service has different generations of hardware, for the same SKU, then that can be captured here. Changing this forces a new resource to be created.
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
-	// The name of the SKU. Possible values include Standard, DataZoneBatch, DataZoneStandard, DataZoneProvisionedManaged, GlobalBatch, GlobalProvisionedManaged, GlobalStandard, and ProvisionedManaged.
+	// The name of the SKU. Possible values include Standard, DataZoneBatch, DataZoneStandard, DataZoneProvisionedManaged, GlobalBatch, GlobalProvisionedManaged, GlobalStandard, and ProvisionedManaged. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code. Changing this forces a new resource to be created.
@@ -157,7 +157,7 @@ type SkuObservation struct {
 	// If the service has different generations of hardware, for the same SKU, then that can be captured here. Changing this forces a new resource to be created.
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
-	// The name of the SKU. Possible values include Standard, DataZoneBatch, DataZoneStandard, DataZoneProvisionedManaged, GlobalBatch, GlobalProvisionedManaged, GlobalStandard, and ProvisionedManaged.
+	// The name of the SKU. Possible values include Standard, DataZoneBatch, DataZoneStandard, DataZoneProvisionedManaged, GlobalBatch, GlobalProvisionedManaged, GlobalStandard, and ProvisionedManaged. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code. Changing this forces a new resource to be created.
@@ -177,7 +177,7 @@ type SkuParameters struct {
 	// +kubebuilder:validation:Optional
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
-	// The name of the SKU. Possible values include Standard, DataZoneBatch, DataZoneStandard, DataZoneProvisionedManaged, GlobalBatch, GlobalProvisionedManaged, GlobalStandard, and ProvisionedManaged.
+	// The name of the SKU. Possible values include Standard, DataZoneBatch, DataZoneStandard, DataZoneProvisionedManaged, GlobalBatch, GlobalProvisionedManaged, GlobalStandard, and ProvisionedManaged. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 

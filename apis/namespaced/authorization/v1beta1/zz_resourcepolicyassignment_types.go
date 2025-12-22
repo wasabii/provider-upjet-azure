@@ -88,7 +88,7 @@ type ResourcePolicyAssignmentInitParameters struct {
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The ID of the Policy Definition or Policy Definition Set. Changing this forces a new Policy Assignment to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/authorization/v1beta1.PolicyDefinition
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/authorization/v1beta1.PolicyDefinition
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PolicyDefinitionID *string `json:"policyDefinitionId,omitempty" tf:"policy_definition_id,omitempty"`
 
@@ -218,6 +218,9 @@ type ResourcePolicyAssignmentOverridesSelectorsInitParameters struct {
 	// The list of allowed values for the specified kind. Cannot be used with not_in. Can contain up to 50 values.
 	In []*string `json:"in,omitempty" tf:"in,omitempty"`
 
+	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation, resourceType and resourceWithoutLocation.
+	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
+
 	// The list of not-allowed values for the specified kind. Cannot be used with in. Can contain up to 50 values.
 	NotIn []*string `json:"notIn,omitempty" tf:"not_in,omitempty"`
 }
@@ -239,6 +242,10 @@ type ResourcePolicyAssignmentOverridesSelectorsParameters struct {
 	// The list of allowed values for the specified kind. Cannot be used with not_in. Can contain up to 50 values.
 	// +kubebuilder:validation:Optional
 	In []*string `json:"in,omitempty" tf:"in,omitempty"`
+
+	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation, resourceType and resourceWithoutLocation.
+	// +kubebuilder:validation:Optional
+	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
 	// The list of not-allowed values for the specified kind. Cannot be used with in. Can contain up to 50 values.
 	// +kubebuilder:validation:Optional
@@ -292,7 +299,7 @@ type ResourcePolicyAssignmentParameters struct {
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The ID of the Policy Definition or Policy Definition Set. Changing this forces a new Policy Assignment to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/authorization/v1beta1.PolicyDefinition
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/authorization/v1beta1.PolicyDefinition
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PolicyDefinitionID *string `json:"policyDefinitionId,omitempty" tf:"policy_definition_id,omitempty"`

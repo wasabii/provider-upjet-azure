@@ -42,8 +42,8 @@ type LoadBalancerOutboundRuleInitParameters struct {
 	AllocatedOutboundPorts *float64 `json:"allocatedOutboundPorts,omitempty" tf:"allocated_outbound_ports,omitempty"`
 
 	// The ID of the Backend Address Pool. Outbound traffic is randomly load balanced across IPs in the backend IPs.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.LoadBalancerBackendAddressPool
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.LoadBalancerBackendAddressPool
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	BackendAddressPoolID *string `json:"backendAddressPoolId,omitempty" tf:"backend_address_pool_id,omitempty"`
 
 	// Reference to a LoadBalancerBackendAddressPool in network to populate backendAddressPoolId.
@@ -54,7 +54,6 @@ type LoadBalancerOutboundRuleInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BackendAddressPoolIDSelector *v1.NamespacedSelector `json:"backendAddressPoolIdSelector,omitempty" tf:"-"`
 
-	// Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP.
 	EnableTCPReset *bool `json:"enableTcpReset,omitempty" tf:"enable_tcp_reset,omitempty"`
 
 	// One or more frontend_ip_configuration blocks as defined below.
@@ -65,6 +64,9 @@ type LoadBalancerOutboundRuleInitParameters struct {
 
 	// The transport protocol for the external endpoint. Possible values are Udp, Tcp or All.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP.
+	TCPResetEnabled *bool `json:"tcpResetEnabled,omitempty" tf:"tcp_reset_enabled,omitempty"`
 }
 
 type LoadBalancerOutboundRuleObservation struct {
@@ -75,7 +77,6 @@ type LoadBalancerOutboundRuleObservation struct {
 	// The ID of the Backend Address Pool. Outbound traffic is randomly load balanced across IPs in the backend IPs.
 	BackendAddressPoolID *string `json:"backendAddressPoolId,omitempty" tf:"backend_address_pool_id,omitempty"`
 
-	// Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP.
 	EnableTCPReset *bool `json:"enableTcpReset,omitempty" tf:"enable_tcp_reset,omitempty"`
 
 	// One or more frontend_ip_configuration blocks as defined below.
@@ -92,6 +93,9 @@ type LoadBalancerOutboundRuleObservation struct {
 
 	// The transport protocol for the external endpoint. Possible values are Udp, Tcp or All.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP.
+	TCPResetEnabled *bool `json:"tcpResetEnabled,omitempty" tf:"tcp_reset_enabled,omitempty"`
 }
 
 type LoadBalancerOutboundRuleParameters struct {
@@ -101,8 +105,8 @@ type LoadBalancerOutboundRuleParameters struct {
 	AllocatedOutboundPorts *float64 `json:"allocatedOutboundPorts,omitempty" tf:"allocated_outbound_ports,omitempty"`
 
 	// The ID of the Backend Address Pool. Outbound traffic is randomly load balanced across IPs in the backend IPs.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.LoadBalancerBackendAddressPool
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.LoadBalancerBackendAddressPool
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BackendAddressPoolID *string `json:"backendAddressPoolId,omitempty" tf:"backend_address_pool_id,omitempty"`
 
@@ -114,7 +118,6 @@ type LoadBalancerOutboundRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	BackendAddressPoolIDSelector *v1.NamespacedSelector `json:"backendAddressPoolIdSelector,omitempty" tf:"-"`
 
-	// Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP.
 	// +kubebuilder:validation:Optional
 	EnableTCPReset *bool `json:"enableTcpReset,omitempty" tf:"enable_tcp_reset,omitempty"`
 
@@ -127,8 +130,8 @@ type LoadBalancerOutboundRuleParameters struct {
 	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
 
 	// The ID of the Load Balancer in which to create the Outbound Rule. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.LoadBalancer
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.LoadBalancer
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LoadbalancerID *string `json:"loadbalancerId,omitempty" tf:"loadbalancer_id,omitempty"`
 
@@ -143,6 +146,10 @@ type LoadBalancerOutboundRuleParameters struct {
 	// The transport protocol for the external endpoint. Possible values are Udp, Tcp or All.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP.
+	// +kubebuilder:validation:Optional
+	TCPResetEnabled *bool `json:"tcpResetEnabled,omitempty" tf:"tcp_reset_enabled,omitempty"`
 }
 
 // LoadBalancerOutboundRuleSpec defines the desired state of LoadBalancerOutboundRule

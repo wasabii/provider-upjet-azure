@@ -60,8 +60,14 @@ type AccountInitParameters struct {
 	// A network_acls block as defined below. When this property is specified, custom_subdomain_name is also required to be set.
 	NetworkAcls []NetworkAclsInitParameters `json:"networkAcls,omitempty" tf:"network_acls,omitempty"`
 
+	// A network_injection block as defined below. Only applicable if the kind is set to AIServices.
+	NetworkInjection []NetworkInjectionInitParameters `json:"networkInjection,omitempty" tf:"network_injection,omitempty"`
+
 	// Whether outbound network access is restricted for the Cognitive Account. Defaults to false.
 	OutboundNetworkAccessRestricted *bool `json:"outboundNetworkAccessRestricted,omitempty" tf:"outbound_network_access_restricted,omitempty"`
+
+	// Whether project management is enabled when the kind is set to AIServices. Once enabled, project_management_enabled cannot be disabled. Defaults to false.
+	ProjectManagementEnabled *bool `json:"projectManagementEnabled,omitempty" tf:"project_management_enabled,omitempty"`
 
 	// Whether public network access is allowed for the Cognitive Account. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
@@ -130,8 +136,14 @@ type AccountObservation struct {
 	// A network_acls block as defined below. When this property is specified, custom_subdomain_name is also required to be set.
 	NetworkAcls []NetworkAclsObservation `json:"networkAcls,omitempty" tf:"network_acls,omitempty"`
 
+	// A network_injection block as defined below. Only applicable if the kind is set to AIServices.
+	NetworkInjection []NetworkInjectionObservation `json:"networkInjection,omitempty" tf:"network_injection,omitempty"`
+
 	// Whether outbound network access is restricted for the Cognitive Account. Defaults to false.
 	OutboundNetworkAccessRestricted *bool `json:"outboundNetworkAccessRestricted,omitempty" tf:"outbound_network_access_restricted,omitempty"`
+
+	// Whether project management is enabled when the kind is set to AIServices. Once enabled, project_management_enabled cannot be disabled. Defaults to false.
+	ProjectManagementEnabled *bool `json:"projectManagementEnabled,omitempty" tf:"project_management_enabled,omitempty"`
 
 	// Whether public network access is allowed for the Cognitive Account. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
@@ -215,9 +227,17 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkAcls []NetworkAclsParameters `json:"networkAcls,omitempty" tf:"network_acls,omitempty"`
 
+	// A network_injection block as defined below. Only applicable if the kind is set to AIServices.
+	// +kubebuilder:validation:Optional
+	NetworkInjection []NetworkInjectionParameters `json:"networkInjection,omitempty" tf:"network_injection,omitempty"`
+
 	// Whether outbound network access is restricted for the Cognitive Account. Defaults to false.
 	// +kubebuilder:validation:Optional
 	OutboundNetworkAccessRestricted *bool `json:"outboundNetworkAccessRestricted,omitempty" tf:"outbound_network_access_restricted,omitempty"`
+
+	// Whether project management is enabled when the kind is set to AIServices. Once enabled, project_management_enabled cannot be disabled. Defaults to false.
+	// +kubebuilder:validation:Optional
+	ProjectManagementEnabled *bool `json:"projectManagementEnabled,omitempty" tf:"project_management_enabled,omitempty"`
 
 	// Whether public network access is allowed for the Cognitive Account. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -228,7 +248,7 @@ type AccountParameters struct {
 	QnaRuntimeEndpoint *string `json:"qnaRuntimeEndpoint,omitempty" tf:"qna_runtime_endpoint,omitempty"`
 
 	// The name of the resource group in which the Cognitive Service Account is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -286,8 +306,8 @@ type CustomerManagedKeyParameters struct {
 type IdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Cognitive Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
@@ -322,8 +342,8 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Cognitive Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
@@ -393,10 +413,59 @@ type NetworkAclsParameters struct {
 	VirtualNetworkRules []VirtualNetworkRulesParameters `json:"virtualNetworkRules,omitempty" tf:"virtual_network_rules,omitempty"`
 }
 
+type NetworkInjectionInitParameters struct {
+
+	// Specifies what features network injection applies to. The only possible value is agent.
+	Scenario *string `json:"scenario,omitempty" tf:"scenario,omitempty"`
+
+	// The ID of the subnet which the Agent Client is injected into.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+}
+
+type NetworkInjectionObservation struct {
+
+	// Specifies what features network injection applies to. The only possible value is agent.
+	Scenario *string `json:"scenario,omitempty" tf:"scenario,omitempty"`
+
+	// The ID of the subnet which the Agent Client is injected into.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+}
+
+type NetworkInjectionParameters struct {
+
+	// Specifies what features network injection applies to. The only possible value is agent.
+	// +kubebuilder:validation:Optional
+	Scenario *string `json:"scenario" tf:"scenario,omitempty"`
+
+	// The ID of the subnet which the Agent Client is injected into.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+}
+
 type StorageInitParameters struct {
 
 	// The client ID of the managed identity associated with the storage resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("client_id",true)
 	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
 
@@ -409,8 +478,8 @@ type StorageInitParameters struct {
 	IdentityClientIDSelector *v1.Selector `json:"identityClientIdSelector,omitempty" tf:"-"`
 
 	// Full resource id of a Microsoft.Storage resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
 	// Reference to a Account in storage to populate storageAccountId.
@@ -434,7 +503,7 @@ type StorageObservation struct {
 type StorageParameters struct {
 
 	// The client ID of the managed identity associated with the storage resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("client_id",true)
 	// +kubebuilder:validation:Optional
 	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
@@ -448,8 +517,8 @@ type StorageParameters struct {
 	IdentityClientIDSelector *v1.Selector `json:"identityClientIdSelector,omitempty" tf:"-"`
 
 	// Full resource id of a Microsoft.Storage resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
@@ -468,8 +537,8 @@ type VirtualNetworkRulesInitParameters struct {
 	IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
 
 	// The ID of the subnet which should be able to access this Cognitive Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate subnetId.
@@ -497,8 +566,8 @@ type VirtualNetworkRulesParameters struct {
 	IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
 
 	// The ID of the subnet which should be able to access this Cognitive Account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 

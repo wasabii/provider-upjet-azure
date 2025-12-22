@@ -7,16 +7,15 @@ package config
 import (
 	"context"
 
-	"github.com/crossplane/upjet/v2/pkg/config"
 	ujconfig "github.com/crossplane/upjet/v2/pkg/config"
 	"github.com/crossplane/upjet/v2/pkg/registry/reference"
 	"github.com/crossplane/upjet/v2/pkg/schema/traverser"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/pkg/errors"
 
-	"github.com/upbound/provider-azure/config/namespaced"
-	"github.com/upbound/provider-azure/config/namespaced/common"
-	"github.com/upbound/provider-azure/hack"
+	"github.com/upbound/provider-azure/v2/config/namespaced"
+	"github.com/upbound/provider-azure/v2/config/namespaced/common"
+	"github.com/upbound/provider-azure/v2/hack"
 )
 
 // GetProviderNamespaced returns the namespaced provider configuration
@@ -92,8 +91,8 @@ func registerTerraformConversions(pc *ujconfig.Provider) {
 			continue
 		}
 
-		r.TerraformConversions = []config.TerraformConversion{
-			config.NewTFSingletonConversion(),
+		r.TerraformConversions = []ujconfig.TerraformConversion{
+			ujconfig.NewTFSingletonConversion(),
 		}
 		pc.Resources[name] = r
 	}

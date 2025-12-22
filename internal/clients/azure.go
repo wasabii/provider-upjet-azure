@@ -23,8 +23,8 @@ import (
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	clusterv1beta1 "github.com/upbound/provider-azure/apis/cluster/v1beta1"
-	namespacedv1beta1 "github.com/upbound/provider-azure/apis/namespaced/v1beta1"
+	clusterv1beta1 "github.com/upbound/provider-azure/v2/apis/cluster/v1beta1"
+	namespacedv1beta1 "github.com/upbound/provider-azure/v2/apis/namespaced/v1beta1"
 )
 
 const (
@@ -61,6 +61,7 @@ const (
 	keyOidcTokenFilePath        = "oidc_token_file_path"
 	keyOidcToken                = "oidc_token"
 	keyUseOIDC                  = "use_oidc"
+	keyStorageUseAzureAD        = "storage_use_azuread"
 	// Default OidcTokenFilePath
 	defaultOidcTokenFilePath = "/var/run/secrets/azure/tokens/azure-identity-token"
 )
@@ -97,8 +98,12 @@ func TerraformSetupBuilder(tfProvider *schema.Provider) terraform.SetupFn { //no
 			// trying to create is not registered and the returned error is
 			// ambiguous. However, this requires service principal to have provider
 			// registration permissions which are irrelevant in most contexts.
-			// For details, see https://github.com/upbound/provider-azure/issues/104
+			// For details, see https://github.com/upbound/provider-azure/v2/issues/104
 			keySkipProviderRegistration: true,
+		}
+
+		if pcSpec.StorageUseAzureAD != nil {
+			ps.Configuration[keyStorageUseAzureAD] = *pcSpec.StorageUseAzureAD
 		}
 
 		switch pcSpec.Credentials.Source { //nolint:exhaustive

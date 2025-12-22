@@ -26,7 +26,7 @@ type CassandraDatacenterInitParameters struct {
 	Base64EncodedYamlFragment *string `json:"base64EncodedYamlFragment,omitempty" tf:"base64_encoded_yaml_fragment,omitempty"`
 
 	// The ID of the delegated management subnet for this Cassandra Datacenter. Changing this forces a new Cassandra Datacenter to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DelegatedManagementSubnetID *string `json:"delegatedManagementSubnetId,omitempty" tf:"delegated_management_subnet_id,omitempty"`
 
@@ -53,7 +53,7 @@ type CassandraDatacenterInitParameters struct {
 	// The number of nodes the Cassandra Datacenter should have. The number should be equal or greater than 3. Defaults to 3.
 	NodeCount *float64 `json:"nodeCount,omitempty" tf:"node_count,omitempty"`
 
-	// Determines the selected sku.
+	// Determines the selected sku. Defaults to Standard_E16s_v5.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 }
 
@@ -95,7 +95,7 @@ type CassandraDatacenterObservation struct {
 	// A list of IP Address for the seed nodes in this Cassandra Datacenter.
 	SeedNodeIPAddresses []*string `json:"seedNodeIpAddresses,omitempty" tf:"seed_node_ip_addresses,omitempty"`
 
-	// Determines the selected sku.
+	// Determines the selected sku. Defaults to Standard_E16s_v5.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 }
 
@@ -114,7 +114,7 @@ type CassandraDatacenterParameters struct {
 	Base64EncodedYamlFragment *string `json:"base64EncodedYamlFragment,omitempty" tf:"base64_encoded_yaml_fragment,omitempty"`
 
 	// The ID of the Cassandra Cluster. Changing this forces a new Cassandra Datacenter to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/cosmosdb/v1beta1.CassandraCluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/cosmosdb/v1beta1.CassandraCluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CassandraClusterID *string `json:"cassandraClusterId,omitempty" tf:"cassandra_cluster_id,omitempty"`
@@ -128,7 +128,7 @@ type CassandraDatacenterParameters struct {
 	CassandraClusterIDSelector *v1.NamespacedSelector `json:"cassandraClusterIdSelector,omitempty" tf:"-"`
 
 	// The ID of the delegated management subnet for this Cassandra Datacenter. Changing this forces a new Cassandra Datacenter to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DelegatedManagementSubnetID *string `json:"delegatedManagementSubnetId,omitempty" tf:"delegated_management_subnet_id,omitempty"`
@@ -161,7 +161,7 @@ type CassandraDatacenterParameters struct {
 	// +kubebuilder:validation:Optional
 	NodeCount *float64 `json:"nodeCount,omitempty" tf:"node_count,omitempty"`
 
-	// Determines the selected sku.
+	// Determines the selected sku. Defaults to Standard_E16s_v5.
 	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 }

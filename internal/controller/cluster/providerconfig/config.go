@@ -11,7 +11,7 @@ import (
 	tjcontroller "github.com/crossplane/upjet/v2/pkg/controller"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/upbound/provider-azure/apis/cluster/v1beta1"
+	"github.com/upbound/provider-azure/v2/apis/cluster/v1beta1"
 )
 
 // Setup adds a controller that reconciles ProviderConfigs by accounting for
@@ -37,7 +37,7 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 // SetupGated adds a controller that reconciles ProviderConfigs by accounting for
 // their current usage.
 func SetupGated(mgr ctrl.Manager, o tjcontroller.Options) error {
-	o.Options.Gate.Register(func() {
+	o.Gate.Register(func() {
 		if err := Setup(mgr, o); err != nil {
 			mgr.GetLogger().Error(err, "unable to setup reconcilers", "gvk", v1beta1.ProviderConfigGroupVersionKind.String())
 		}

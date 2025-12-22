@@ -17,7 +17,7 @@ import (
 type BackupInstancePostgreSQLFlexibleServerInitParameters struct {
 
 	// The ID of the Backup Policy.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/dataprotection/v1beta1.BackupPolicyPostgreSQLFlexibleServer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/dataprotection/v1beta1.BackupPolicyPostgreSQLFlexibleServer
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
 
@@ -33,7 +33,7 @@ type BackupInstancePostgreSQLFlexibleServerInitParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the source server. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/dbforpostgresql/v1beta1.FlexibleServer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/dbforpostgresql/v1beta1.FlexibleServer
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
@@ -57,6 +57,9 @@ type BackupInstancePostgreSQLFlexibleServerObservation struct {
 	// The location of the source database. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// The protection state of the Backup Instance PostgreSQL Flexible Server.
+	ProtectionState *string `json:"protectionState,omitempty" tf:"protection_state,omitempty"`
+
 	// The ID of the source server. Changing this forces a new resource to be created.
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
@@ -67,7 +70,7 @@ type BackupInstancePostgreSQLFlexibleServerObservation struct {
 type BackupInstancePostgreSQLFlexibleServerParameters struct {
 
 	// The ID of the Backup Policy.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/dataprotection/v1beta1.BackupPolicyPostgreSQLFlexibleServer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/dataprotection/v1beta1.BackupPolicyPostgreSQLFlexibleServer
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
@@ -85,7 +88,7 @@ type BackupInstancePostgreSQLFlexibleServerParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the source server. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/dbforpostgresql/v1beta1.FlexibleServer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/dbforpostgresql/v1beta1.FlexibleServer
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
@@ -99,7 +102,7 @@ type BackupInstancePostgreSQLFlexibleServerParameters struct {
 	ServerIDSelector *v1.NamespacedSelector `json:"serverIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Backup Vault within which the PostgreSQL Flexible Server Backup Instance should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/dataprotection/v1beta1.BackupVault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/dataprotection/v1beta1.BackupVault
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`

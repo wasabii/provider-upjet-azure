@@ -27,6 +27,8 @@ type WorkspaceAADAdminInitParameters struct {
 }
 
 type WorkspaceAADAdminObservation struct {
+
+	// The ID of the Synapse Workspace Azure AD Administrator.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The login name of the Azure AD Administrator of this Synapse Workspace.
@@ -53,7 +55,7 @@ type WorkspaceAADAdminParameters struct {
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
 	// The ID of the Synapse Workspace where the Azure AD Administrator should be configured.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/synapse/v1beta1.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/synapse/v1beta1.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SynapseWorkspaceID *string `json:"synapseWorkspaceId,omitempty" tf:"synapse_workspace_id,omitempty"`

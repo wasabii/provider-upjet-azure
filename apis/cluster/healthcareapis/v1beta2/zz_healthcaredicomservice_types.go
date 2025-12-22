@@ -108,7 +108,7 @@ type HealthcareDICOMServiceInitParameters struct {
 	// Whether to enabled public networks when data plane traffic coming from public networks while private endpoint is enabled. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
-	// A storage block as defined below.
+	// A storage block as defined below. Changing this forces a new resource to be created.
 	Storage *StorageInitParameters `json:"storage,omitempty" tf:"storage,omitempty"`
 
 	// A mapping of tags to assign to the Healthcare DICOM Service.
@@ -147,7 +147,7 @@ type HealthcareDICOMServiceObservation struct {
 	// The url of the Healthcare DICOM Services.
 	ServiceURL *string `json:"serviceUrl,omitempty" tf:"service_url,omitempty"`
 
-	// A storage block as defined below.
+	// A storage block as defined below. Changing this forces a new resource to be created.
 	Storage *StorageObservation `json:"storage,omitempty" tf:"storage,omitempty"`
 
 	// A mapping of tags to assign to the Healthcare DICOM Service.
@@ -184,7 +184,7 @@ type HealthcareDICOMServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
-	// A storage block as defined below.
+	// A storage block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Storage *StorageParameters `json:"storage,omitempty" tf:"storage,omitempty"`
 
@@ -194,7 +194,7 @@ type HealthcareDICOMServiceParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the ID of the Healthcare Workspace where the Healthcare DICOM Service should exist. Changing this forces a new Healthcare DICOM Service to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/healthcareapis/v1beta1.HealthcareWorkspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/healthcareapis/v1beta1.HealthcareWorkspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`

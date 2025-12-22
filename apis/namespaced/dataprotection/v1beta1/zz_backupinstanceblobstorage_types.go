@@ -17,7 +17,7 @@ import (
 type BackupInstanceBlobStorageInitParameters struct {
 
 	// The ID of the Backup Policy.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/dataprotection/v1beta1.BackupPolicyBlobStorage
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/dataprotection/v1beta1.BackupPolicyBlobStorage
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
 
@@ -36,7 +36,7 @@ type BackupInstanceBlobStorageInitParameters struct {
 	StorageAccountContainerNames []*string `json:"storageAccountContainerNames,omitempty" tf:"storage_account_container_names,omitempty"`
 
 	// The ID of the source Storage Account. Changing this forces a new Backup Instance Blob Storage to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
@@ -60,6 +60,9 @@ type BackupInstanceBlobStorageObservation struct {
 	// The location of the source Storage Account. Changing this forces a new Backup Instance Blob Storage to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// The protection state of the Backup Instance Blob Storage.
+	ProtectionState *string `json:"protectionState,omitempty" tf:"protection_state,omitempty"`
+
 	// The list of the container names of the source Storage Account.
 	StorageAccountContainerNames []*string `json:"storageAccountContainerNames,omitempty" tf:"storage_account_container_names,omitempty"`
 
@@ -73,7 +76,7 @@ type BackupInstanceBlobStorageObservation struct {
 type BackupInstanceBlobStorageParameters struct {
 
 	// The ID of the Backup Policy.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/dataprotection/v1beta1.BackupPolicyBlobStorage
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/dataprotection/v1beta1.BackupPolicyBlobStorage
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
@@ -95,7 +98,7 @@ type BackupInstanceBlobStorageParameters struct {
 	StorageAccountContainerNames []*string `json:"storageAccountContainerNames,omitempty" tf:"storage_account_container_names,omitempty"`
 
 	// The ID of the source Storage Account. Changing this forces a new Backup Instance Blob Storage to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
@@ -109,7 +112,7 @@ type BackupInstanceBlobStorageParameters struct {
 	StorageAccountIDSelector *v1.NamespacedSelector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Backup Vault within which the Backup Instance Blob Storage should exist. Changing this forces a new Backup Instance Blob Storage to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/dataprotection/v1beta1.BackupVault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/dataprotection/v1beta1.BackupVault
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`

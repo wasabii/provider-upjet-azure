@@ -16,6 +16,9 @@ import (
 
 type PublicIPPrefixInitParameters struct {
 
+	// The Custom IP Prefix ID associated with the Public IP Prefix. Changing this forces a new resource to be created.
+	CustomIPPrefixID *string `json:"customIpPrefixId,omitempty" tf:"custom_ip_prefix_id,omitempty"`
+
 	// The IP Version to use, IPv6 or IPv4. Changing this forces a new resource to be created. Default is IPv4.
 	IPVersion *string `json:"ipVersion,omitempty" tf:"ip_version,omitempty"`
 
@@ -41,6 +44,9 @@ type PublicIPPrefixInitParameters struct {
 }
 
 type PublicIPPrefixObservation struct {
+
+	// The Custom IP Prefix ID associated with the Public IP Prefix. Changing this forces a new resource to be created.
+	CustomIPPrefixID *string `json:"customIpPrefixId,omitempty" tf:"custom_ip_prefix_id,omitempty"`
 
 	// The Public IP Prefix ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -77,6 +83,10 @@ type PublicIPPrefixObservation struct {
 
 type PublicIPPrefixParameters struct {
 
+	// The Custom IP Prefix ID associated with the Public IP Prefix. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	CustomIPPrefixID *string `json:"customIpPrefixId,omitempty" tf:"custom_ip_prefix_id,omitempty"`
+
 	// The IP Version to use, IPv6 or IPv4. Changing this forces a new resource to be created. Default is IPv4.
 	// +kubebuilder:validation:Optional
 	IPVersion *string `json:"ipVersion,omitempty" tf:"ip_version,omitempty"`
@@ -90,7 +100,7 @@ type PublicIPPrefixParameters struct {
 	PrefixLength *float64 `json:"prefixLength,omitempty" tf:"prefix_length,omitempty"`
 
 	// The name of the resource group in which to create the Public IP Prefix. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

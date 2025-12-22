@@ -46,8 +46,8 @@ type DynamicRoutingEnrichmentParameters struct {
 type EventGridNamespaceIdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Event Grid Namespace.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
@@ -82,8 +82,8 @@ type EventGridNamespaceIdentityObservation struct {
 type EventGridNamespaceIdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Event Grid Namespace.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
@@ -144,7 +144,7 @@ type EventGridNamespaceInitParameters struct {
 	// Specifies the supported Azure location where the resource should exist. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Whether or not public network access is allowed for this server. Defaults to Enabled.
+	// Whether or not public network access is allowed for this server. Possible values are Enabled and Disabled. Defaults to Enabled.
 	PublicNetworkAccess *string `json:"publicNetworkAccess,omitempty" tf:"public_network_access,omitempty"`
 
 	// Defines which tier to use. The only possible value is Standard. Defaults to Standard.
@@ -154,7 +154,7 @@ type EventGridNamespaceInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A topic_spaces_configuration block as defined below.
+	// A topic_spaces_configuration block as defined below. Changing this forces a new resource to be created.
 	TopicSpacesConfiguration []TopicSpacesConfigurationInitParameters `json:"topicSpacesConfiguration,omitempty" tf:"topic_spaces_configuration,omitempty"`
 }
 
@@ -175,7 +175,7 @@ type EventGridNamespaceObservation struct {
 	// Specifies the supported Azure location where the resource should exist. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Whether or not public network access is allowed for this server. Defaults to Enabled.
+	// Whether or not public network access is allowed for this server. Possible values are Enabled and Disabled. Defaults to Enabled.
 	PublicNetworkAccess *string `json:"publicNetworkAccess,omitempty" tf:"public_network_access,omitempty"`
 
 	// The name of the resource group in which the Event Grid Namespace should exist. Changing this forces a new resource to be created.
@@ -188,7 +188,7 @@ type EventGridNamespaceObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A topic_spaces_configuration block as defined below.
+	// A topic_spaces_configuration block as defined below. Changing this forces a new resource to be created.
 	TopicSpacesConfiguration []TopicSpacesConfigurationObservation `json:"topicSpacesConfiguration,omitempty" tf:"topic_spaces_configuration,omitempty"`
 }
 
@@ -210,12 +210,12 @@ type EventGridNamespaceParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Whether or not public network access is allowed for this server. Defaults to Enabled.
+	// Whether or not public network access is allowed for this server. Possible values are Enabled and Disabled. Defaults to Enabled.
 	// +kubebuilder:validation:Optional
 	PublicNetworkAccess *string `json:"publicNetworkAccess,omitempty" tf:"public_network_access,omitempty"`
 
 	// The name of the resource group in which the Event Grid Namespace should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -236,7 +236,7 @@ type EventGridNamespaceParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A topic_spaces_configuration block as defined below.
+	// A topic_spaces_configuration block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	TopicSpacesConfiguration []TopicSpacesConfigurationParameters `json:"topicSpacesConfiguration,omitempty" tf:"topic_spaces_configuration,omitempty"`
 }

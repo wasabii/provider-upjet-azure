@@ -143,8 +143,8 @@ type PolicySetDefinitionInitParameters struct {
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// The ID of the Policy Set Definition.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/management/v1beta1.ManagementGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/management/v1beta1.ManagementGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	ManagementGroupID *string `json:"managementGroupId,omitempty" tf:"management_group_id,omitempty"`
 
 	// Reference to a ManagementGroup in management to populate managementGroupId.
@@ -158,7 +158,7 @@ type PolicySetDefinitionInitParameters struct {
 	// The metadata for the Policy Set Definition in JSON format.
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
-	// The parameters for the Policy Set Definition in JSON format.
+	// The parameters for the Policy Set Definition in JSON format. Reducing the number of parameters forces a new resource to be created.
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// One or more policy_definition_group blocks as defined below.
@@ -188,7 +188,7 @@ type PolicySetDefinitionObservation struct {
 	// The metadata for the Policy Set Definition in JSON format.
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
-	// The parameters for the Policy Set Definition in JSON format.
+	// The parameters for the Policy Set Definition in JSON format. Reducing the number of parameters forces a new resource to be created.
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// One or more policy_definition_group blocks as defined below.
@@ -212,8 +212,8 @@ type PolicySetDefinitionParameters struct {
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// The ID of the Policy Set Definition.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/management/v1beta1.ManagementGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/management/v1beta1.ManagementGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ManagementGroupID *string `json:"managementGroupId,omitempty" tf:"management_group_id,omitempty"`
 
@@ -229,7 +229,7 @@ type PolicySetDefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
-	// The parameters for the Policy Set Definition in JSON format.
+	// The parameters for the Policy Set Definition in JSON format. Reducing the number of parameters forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 

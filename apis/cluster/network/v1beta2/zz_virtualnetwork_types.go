@@ -77,38 +77,6 @@ type EncryptionParameters struct {
 	Enforcement *string `json:"enforcement" tf:"enforcement,omitempty"`
 }
 
-type IPAddressPoolInitParameters struct {
-
-	// The ID of the Network Manager IP Address Management (IPAM) Pool.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
-
-	// The number of IP addresses to allocated to the Virtual Network. The value must be a string that represents a positive number, e.g., "100".
-	NumberOfIPAddresses *string `json:"numberOfIpAddresses,omitempty" tf:"number_of_ip_addresses,omitempty"`
-}
-
-type IPAddressPoolObservation struct {
-
-	// The list of IP address prefixes allocated to the Virtual Network.
-	AllocatedIPAddressPrefixes []*string `json:"allocatedIpAddressPrefixes,omitempty" tf:"allocated_ip_address_prefixes,omitempty"`
-
-	// The ID of the Network Manager IP Address Management (IPAM) Pool.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
-
-	// The number of IP addresses to allocated to the Virtual Network. The value must be a string that represents a positive number, e.g., "100".
-	NumberOfIPAddresses *string `json:"numberOfIpAddresses,omitempty" tf:"number_of_ip_addresses,omitempty"`
-}
-
-type IPAddressPoolParameters struct {
-
-	// The ID of the Network Manager IP Address Management (IPAM) Pool.
-	// +kubebuilder:validation:Optional
-	ID *string `json:"id" tf:"id,omitempty"`
-
-	// The number of IP addresses to allocated to the Virtual Network. The value must be a string that represents a positive number, e.g., "100".
-	// +kubebuilder:validation:Optional
-	NumberOfIPAddresses *string `json:"numberOfIpAddresses" tf:"number_of_ip_addresses,omitempty"`
-}
-
 type SubnetDelegationInitParameters struct {
 }
 
@@ -122,6 +90,38 @@ type SubnetDelegationObservation struct {
 }
 
 type SubnetDelegationParameters struct {
+}
+
+type VirtualNetworkIPAddressPoolInitParameters struct {
+
+	// The ID of the Network Manager IP Address Management (IPAM) Pool.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The number of IP addresses to allocated to the Virtual Network. The value must be a string that represents a positive number, e.g., "100".
+	NumberOfIPAddresses *string `json:"numberOfIpAddresses,omitempty" tf:"number_of_ip_addresses,omitempty"`
+}
+
+type VirtualNetworkIPAddressPoolObservation struct {
+
+	// The list of IP address prefixes allocated to the Virtual Network.
+	AllocatedIPAddressPrefixes []*string `json:"allocatedIpAddressPrefixes,omitempty" tf:"allocated_ip_address_prefixes,omitempty"`
+
+	// The ID of the Network Manager IP Address Management (IPAM) Pool.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The number of IP addresses to allocated to the Virtual Network. The value must be a string that represents a positive number, e.g., "100".
+	NumberOfIPAddresses *string `json:"numberOfIpAddresses,omitempty" tf:"number_of_ip_addresses,omitempty"`
+}
+
+type VirtualNetworkIPAddressPoolParameters struct {
+
+	// The ID of the Network Manager IP Address Management (IPAM) Pool.
+	// +kubebuilder:validation:Optional
+	ID *string `json:"id" tf:"id,omitempty"`
+
+	// The number of IP addresses to allocated to the Virtual Network. The value must be a string that represents a positive number, e.g., "100".
+	// +kubebuilder:validation:Optional
+	NumberOfIPAddresses *string `json:"numberOfIpAddresses" tf:"number_of_ip_addresses,omitempty"`
 }
 
 type VirtualNetworkInitParameters struct {
@@ -145,8 +145,8 @@ type VirtualNetworkInitParameters struct {
 	// The flow timeout in minutes for the Virtual Network, which is used to enable connection tracking for intra-VM flows. Possible values are between 4 and 30 minutes.
 	FlowTimeoutInMinutes *float64 `json:"flowTimeoutInMinutes,omitempty" tf:"flow_timeout_in_minutes,omitempty"`
 
-	// One or two ip_address_pool blocks as defined below. Only one association of each IP type(IPv4 or IPv6) is allowed.
-	IPAddressPool []IPAddressPoolInitParameters `json:"ipAddressPool,omitempty" tf:"ip_address_pool,omitempty"`
+	// One or more ip_address_pool blocks as defined below. Only one association of each IP type(IPv4 or IPv6) is allowed.
+	IPAddressPool []VirtualNetworkIPAddressPoolInitParameters `json:"ipAddressPool,omitempty" tf:"ip_address_pool,omitempty"`
 
 	// The location/region where the virtual network is created. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -189,8 +189,8 @@ type VirtualNetworkObservation struct {
 	// The Virtual Network ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// One or two ip_address_pool blocks as defined below. Only one association of each IP type(IPv4 or IPv6) is allowed.
-	IPAddressPool []IPAddressPoolObservation `json:"ipAddressPool,omitempty" tf:"ip_address_pool,omitempty"`
+	// One or more ip_address_pool blocks as defined below. Only one association of each IP type(IPv4 or IPv6) is allowed.
+	IPAddressPool []VirtualNetworkIPAddressPoolObservation `json:"ipAddressPool,omitempty" tf:"ip_address_pool,omitempty"`
 
 	// The location/region where the virtual network is created. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -236,9 +236,9 @@ type VirtualNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	FlowTimeoutInMinutes *float64 `json:"flowTimeoutInMinutes,omitempty" tf:"flow_timeout_in_minutes,omitempty"`
 
-	// One or two ip_address_pool blocks as defined below. Only one association of each IP type(IPv4 or IPv6) is allowed.
+	// One or more ip_address_pool blocks as defined below. Only one association of each IP type(IPv4 or IPv6) is allowed.
 	// +kubebuilder:validation:Optional
-	IPAddressPool []IPAddressPoolParameters `json:"ipAddressPool,omitempty" tf:"ip_address_pool,omitempty"`
+	IPAddressPool []VirtualNetworkIPAddressPoolParameters `json:"ipAddressPool,omitempty" tf:"ip_address_pool,omitempty"`
 
 	// The location/region where the virtual network is created. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -249,7 +249,7 @@ type VirtualNetworkParameters struct {
 	PrivateEndpointVnetPolicies *string `json:"privateEndpointVnetPolicies,omitempty" tf:"private_endpoint_vnet_policies,omitempty"`
 
 	// The name of the resource group in which to create the virtual network. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

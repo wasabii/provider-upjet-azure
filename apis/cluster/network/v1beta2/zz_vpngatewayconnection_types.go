@@ -48,7 +48,7 @@ type VPNGatewayConnectionInitParameters struct {
 	InternetSecurityEnabled *bool `json:"internetSecurityEnabled,omitempty" tf:"internet_security_enabled,omitempty"`
 
 	// The ID of the remote VPN Site, which will connect to the VPN Gateway. Changing this forces a new VPN Gateway Connection to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.VPNSite
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.VPNSite
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RemoteVPNSiteID *string `json:"remoteVpnSiteId,omitempty" tf:"remote_vpn_site_id,omitempty"`
 
@@ -101,7 +101,7 @@ type VPNGatewayConnectionParameters struct {
 	InternetSecurityEnabled *bool `json:"internetSecurityEnabled,omitempty" tf:"internet_security_enabled,omitempty"`
 
 	// The ID of the remote VPN Site, which will connect to the VPN Gateway. Changing this forces a new VPN Gateway Connection to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.VPNSite
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.VPNSite
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RemoteVPNSiteID *string `json:"remoteVpnSiteId,omitempty" tf:"remote_vpn_site_id,omitempty"`
@@ -123,7 +123,7 @@ type VPNGatewayConnectionParameters struct {
 	TrafficSelectorPolicy []VPNGatewayConnectionTrafficSelectorPolicyParameters `json:"trafficSelectorPolicy,omitempty" tf:"traffic_selector_policy,omitempty"`
 
 	// The ID of the VPN Gateway that this VPN Gateway Connection belongs to. Changing this forces a new VPN Gateway Connection to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.VPNGateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.VPNGateway
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VPNGatewayID *string `json:"vpnGatewayId,omitempty" tf:"vpn_gateway_id,omitempty"`
@@ -271,6 +271,9 @@ type VPNLinkInitParameters struct {
 	// One or more custom_bgp_address blocks as defined below.
 	CustomBGPAddress []CustomBGPAddressInitParameters `json:"customBgpAddress,omitempty" tf:"custom_bgp_address,omitempty"`
 
+	// The dead peer detection timeout of this connection in seconds. Possible values are between 9 and 3600.
+	DpdTimeoutSeconds *float64 `json:"dpdTimeoutSeconds,omitempty" tf:"dpd_timeout_seconds,omitempty"`
+
 	// A list of the egress NAT Rule Ids.
 	// +listType=set
 	EgressNATRuleIds []*string `json:"egressNatRuleIds,omitempty" tf:"egress_nat_rule_ids,omitempty"`
@@ -410,6 +413,9 @@ type VPNLinkObservation struct {
 	// One or more custom_bgp_address blocks as defined below.
 	CustomBGPAddress []CustomBGPAddressObservation `json:"customBgpAddress,omitempty" tf:"custom_bgp_address,omitempty"`
 
+	// The dead peer detection timeout of this connection in seconds. Possible values are between 9 and 3600.
+	DpdTimeoutSeconds *float64 `json:"dpdTimeoutSeconds,omitempty" tf:"dpd_timeout_seconds,omitempty"`
+
 	// A list of the egress NAT Rule Ids.
 	// +listType=set
 	EgressNATRuleIds []*string `json:"egressNatRuleIds,omitempty" tf:"egress_nat_rule_ids,omitempty"`
@@ -463,6 +469,10 @@ type VPNLinkParameters struct {
 	// One or more custom_bgp_address blocks as defined below.
 	// +kubebuilder:validation:Optional
 	CustomBGPAddress []CustomBGPAddressParameters `json:"customBgpAddress,omitempty" tf:"custom_bgp_address,omitempty"`
+
+	// The dead peer detection timeout of this connection in seconds. Possible values are between 9 and 3600.
+	// +kubebuilder:validation:Optional
+	DpdTimeoutSeconds *float64 `json:"dpdTimeoutSeconds,omitempty" tf:"dpd_timeout_seconds,omitempty"`
 
 	// A list of the egress NAT Rule Ids.
 	// +kubebuilder:validation:Optional

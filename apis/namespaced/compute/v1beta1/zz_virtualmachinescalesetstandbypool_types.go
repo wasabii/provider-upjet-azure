@@ -46,8 +46,8 @@ type ElasticityProfileParameters struct {
 type VirtualMachineScaleSetStandbyPoolInitParameters struct {
 
 	// Specifies the fully qualified resource ID of a virtual machine scale set the pool is attached to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/compute/v1beta1.OrchestratedVirtualMachineScaleSet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/compute/v1beta1.OrchestratedVirtualMachineScaleSet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	AttachedVirtualMachineScaleSetID *string `json:"attachedVirtualMachineScaleSetId,omitempty" tf:"attached_virtual_machine_scale_set_id,omitempty"`
 
 	// Reference to a OrchestratedVirtualMachineScaleSet in compute to populate attachedVirtualMachineScaleSetId.
@@ -68,7 +68,7 @@ type VirtualMachineScaleSetStandbyPoolInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies the desired state of virtual machines in the pool. Possible values are Running and Deallocated.
+	// Specifies the desired state of virtual machines in the pool. Possible values are Deallocated, Hibernated and Running.
 	VirtualMachineState *string `json:"virtualMachineState,omitempty" tf:"virtual_machine_state,omitempty"`
 }
 
@@ -93,15 +93,15 @@ type VirtualMachineScaleSetStandbyPoolObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies the desired state of virtual machines in the pool. Possible values are Running and Deallocated.
+	// Specifies the desired state of virtual machines in the pool. Possible values are Deallocated, Hibernated and Running.
 	VirtualMachineState *string `json:"virtualMachineState,omitempty" tf:"virtual_machine_state,omitempty"`
 }
 
 type VirtualMachineScaleSetStandbyPoolParameters struct {
 
 	// Specifies the fully qualified resource ID of a virtual machine scale set the pool is attached to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/compute/v1beta1.OrchestratedVirtualMachineScaleSet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/compute/v1beta1.OrchestratedVirtualMachineScaleSet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AttachedVirtualMachineScaleSetID *string `json:"attachedVirtualMachineScaleSetId,omitempty" tf:"attached_virtual_machine_scale_set_id,omitempty"`
 
@@ -122,7 +122,7 @@ type VirtualMachineScaleSetStandbyPoolParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name of the Resource Group where the Standby Pool should exist. Changing this forces a new Standby Pool to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -139,7 +139,7 @@ type VirtualMachineScaleSetStandbyPoolParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies the desired state of virtual machines in the pool. Possible values are Running and Deallocated.
+	// Specifies the desired state of virtual machines in the pool. Possible values are Deallocated, Hibernated and Running.
 	// +kubebuilder:validation:Optional
 	VirtualMachineState *string `json:"virtualMachineState,omitempty" tf:"virtual_machine_state,omitempty"`
 }

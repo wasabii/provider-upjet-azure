@@ -32,7 +32,7 @@ type IOTHubEndpointServiceBusTopicInitParameters struct {
 	IdentityID *string `json:"identityId,omitempty" tf:"identity_id,omitempty"`
 
 	// The name of the resource group under which the Service Bus Topic has been created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
@@ -42,6 +42,9 @@ type IOTHubEndpointServiceBusTopicInitParameters struct {
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
+	// The subscription ID for the endpoint.
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 }
 
 type IOTHubEndpointServiceBusTopicObservation struct {
@@ -66,6 +69,9 @@ type IOTHubEndpointServiceBusTopicObservation struct {
 
 	// The name of the resource group under which the Service Bus Topic has been created. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The subscription ID for the endpoint.
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 }
 
 type IOTHubEndpointServiceBusTopicParameters struct {
@@ -87,7 +93,7 @@ type IOTHubEndpointServiceBusTopicParameters struct {
 	EntityPath *string `json:"entityPath,omitempty" tf:"entity_path,omitempty"`
 
 	// The IoTHub ID for the endpoint. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/devices/v1beta1.IOTHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/devices/v1beta1.IOTHub
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	IOTHubID *string `json:"iothubId,omitempty" tf:"iothub_id,omitempty"`
@@ -105,7 +111,7 @@ type IOTHubEndpointServiceBusTopicParameters struct {
 	IdentityID *string `json:"identityId,omitempty" tf:"identity_id,omitempty"`
 
 	// The name of the resource group under which the Service Bus Topic has been created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -116,6 +122,10 @@ type IOTHubEndpointServiceBusTopicParameters struct {
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.NamespacedSelector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
+	// The subscription ID for the endpoint.
+	// +kubebuilder:validation:Optional
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 }
 
 // IOTHubEndpointServiceBusTopicSpec defines the desired state of IOTHubEndpointServiceBusTopic

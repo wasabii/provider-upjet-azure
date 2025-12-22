@@ -10,8 +10,8 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/config"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 
-	"github.com/upbound/provider-azure/apis/cluster/rconfig"
-	"github.com/upbound/provider-azure/config/cluster/common"
+	"github.com/upbound/provider-azure/v2/apis/cluster/rconfig"
+	"github.com/upbound/provider-azure/v2/config/cluster/common"
 )
 
 // Configure configures storage group
@@ -88,6 +88,10 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.References["storage_account_name"] = config.Reference{
 			TerraformName: "azurerm_storage_account",
 			Extractor:     `github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",true)`,
+		}
+		r.References["storage_share_id"] = config.Reference{
+			TerraformName: "azurerm_storage_share",
+			Extractor:     "github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()",
 		}
 	})
 

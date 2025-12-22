@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/upbound/provider-azure/config/cluster/common"
+	"github.com/upbound/provider-azure/v2/config/cluster/common"
 
 	"github.com/pkg/errors"
 
@@ -535,9 +535,6 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// /managementGroup/MyManagementGroup/subscription/12345678-1234-1234-1234-123456789012
 	"azurerm_management_group_subscription_association": managementGroupSubscriptionAssociation(),
 
-	// mixedreality
-	"azurerm_spatial_anchors_account": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.MixedReality/spatialAnchorsAccounts/{{ .external_name }}"),
-
 	// dbformysql
 	// dbformysql flexible variants
 	"azurerm_mysql_flexible_server":               config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DBforMySQL/flexibleServers/{{ .external_name }}"),
@@ -713,6 +710,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_redis_linked_server":                  config.TemplatedStringAsIdentifier("", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Cache/redis/{{ .parameters.target_redis_cache_name }}/linkedServers/{{ .parameters.linked_redis_cache_name }}"),
 	"azurerm_redis_cache_access_policy":            config.TemplatedStringAsIdentifier("name", "{{ .parameters.redis_cache_id }}/accessPolicies/{{ .external_name }}"),
 	"azurerm_redis_cache_access_policy_assignment": config.TemplatedStringAsIdentifier("name", "{{ .parameters.redis_cache_id }}/accessPolicyAssignments/{{ .external_name }}"),
+	// terraform import azurerm_managed_redis.example /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Cache/redisEnterprise/cluster1
+	"azurerm_managed_redis": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Cache/redisEnterprise/{{ .external_name }}"),
 
 	// resource
 	"azurerm_resource_group_template_deployment": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Resources/deployments/{{ .external_name }}"),
@@ -1747,6 +1746,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_virtual_hub_route_table": config.TemplatedStringAsIdentifier("name", "{{ .parameters.virtual_hub_id }}/hubRouteTables/{{ .external_name }}"),
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/virtualHubs/virtualHub1/hubRouteTables/routeTable1/routes/routeName
 	"azurerm_virtual_hub_route_table_route": config.TemplatedStringAsIdentifier("name", "{{ .parameters.route_table_id }}/routes/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.Network/virtualHubs/virtualHub1/routingIntent/routingIntent1
+	"azurerm_virtual_hub_routing_intent": config.TemplatedStringAsIdentifier("name", "{{ .parameters.virtual_hub_id }}/routingIntent/{{ .external_name }}"),
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/securityPartnerProviders/securityPartnerProvider1
 	"azurerm_virtual_hub_security_partner_provider": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/securityPartnerProviders/{{ .external_name }}"),
 
@@ -2028,7 +2029,7 @@ func storageDataLakeGen2Filesystem() config.ExternalName {
 }
 
 // custom function for azurerm_management_group_subscription_association
-// /managementGroup/MyManagementGroup/subscription/12345678-1234-1234-1234-123456789012
+// /providers/Microsoft.Management/managementGroups/MyManagementGroup/subscriptions/12345678-1234-1234-1234-123456789012
 func managementGroupSubscriptionAssociation() config.ExternalName {
 	e := config.IdentifierFromProvider
 	e.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
@@ -2046,7 +2047,7 @@ func managementGroupSubscriptionAssociation() config.ExternalName {
 		w := strings.Split(externalName, "/")
 		managementGroupName := w[0]
 		subscriptionId := w[1]
-		return fmt.Sprintf("/managementGroup/%s/subscription/%s", managementGroupName, subscriptionId), nil
+		return fmt.Sprintf("/providers/Microsoft.Management/managementGroups/%s/subscriptions/%s", managementGroupName, subscriptionId), nil
 	}
 	return e
 }

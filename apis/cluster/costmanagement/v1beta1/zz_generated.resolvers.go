@@ -12,7 +12,7 @@ import (
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
-	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	apisresolver "github.com/upbound/provider-azure/v2/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -33,7 +33,7 @@ func (mg *ResourceGroupCostManagementExport) ResolveReferences( // ResolveRefere
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExportDataStorageLocation[i3].ContainerID),
-				Extract:      resource.ExtractParamPath("resource_manager_id", true),
+				Extract:      resource.ExtractResourceID(),
 				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ExportDataStorageLocation[i3].ContainerIDRef,
 				Selector:     mg.Spec.ForProvider.ExportDataStorageLocation[i3].ContainerIDSelector,
@@ -75,7 +75,7 @@ func (mg *ResourceGroupCostManagementExport) ResolveReferences( // ResolveRefere
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerID),
-				Extract:      resource.ExtractParamPath("resource_manager_id", true),
+				Extract:      resource.ExtractResourceID(),
 				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerIDRef,
 				Selector:     mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerIDSelector,
@@ -129,7 +129,7 @@ func (mg *SubscriptionCostManagementExport) ResolveReferences(ctx context.Contex
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExportDataStorageLocation[i3].ContainerID),
-				Extract:      resource.ExtractParamPath("resource_manager_id", true),
+				Extract:      resource.ExtractResourceID(),
 				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ExportDataStorageLocation[i3].ContainerIDRef,
 				Selector:     mg.Spec.ForProvider.ExportDataStorageLocation[i3].ContainerIDSelector,
@@ -171,7 +171,7 @@ func (mg *SubscriptionCostManagementExport) ResolveReferences(ctx context.Contex
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerID),
-				Extract:      resource.ExtractParamPath("resource_manager_id", true),
+				Extract:      resource.ExtractResourceID(),
 				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerIDRef,
 				Selector:     mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerIDSelector,

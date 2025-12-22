@@ -313,7 +313,7 @@ type ApplicationGatewayParameters struct {
 	RequestRoutingRule []RequestRoutingRuleParameters `json:"requestRoutingRule,omitempty" tf:"request_routing_rule,omitempty"`
 
 	// The name of the resource group in which to the Application Gateway should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -514,6 +514,9 @@ type BackendHTTPSettingsInitParameters struct {
 	// Is Cookie-Based Affinity enabled? Possible values are Enabled and Disabled.
 	CookieBasedAffinity *string `json:"cookieBasedAffinity,omitempty" tf:"cookie_based_affinity,omitempty"`
 
+	// Whether to use a dedicated backend connection. Defaults to false.
+	DedicatedBackendConnectionEnabled *bool `json:"dedicatedBackendConnectionEnabled,omitempty" tf:"dedicated_backend_connection_enabled,omitempty"`
+
 	// Host header to be sent to the backend servers. Cannot be set if pick_host_name_from_backend_address is set to true.
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
 
@@ -555,6 +558,9 @@ type BackendHTTPSettingsObservation struct {
 
 	// Is Cookie-Based Affinity enabled? Possible values are Enabled and Disabled.
 	CookieBasedAffinity *string `json:"cookieBasedAffinity,omitempty" tf:"cookie_based_affinity,omitempty"`
+
+	// Whether to use a dedicated backend connection. Defaults to false.
+	DedicatedBackendConnectionEnabled *bool `json:"dedicatedBackendConnectionEnabled,omitempty" tf:"dedicated_backend_connection_enabled,omitempty"`
 
 	// Host header to be sent to the backend servers. Cannot be set if pick_host_name_from_backend_address is set to true.
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
@@ -607,6 +613,10 @@ type BackendHTTPSettingsParameters struct {
 	// Is Cookie-Based Affinity enabled? Possible values are Enabled and Disabled.
 	// +kubebuilder:validation:Optional
 	CookieBasedAffinity *string `json:"cookieBasedAffinity" tf:"cookie_based_affinity,omitempty"`
+
+	// Whether to use a dedicated backend connection. Defaults to false.
+	// +kubebuilder:validation:Optional
+	DedicatedBackendConnectionEnabled *bool `json:"dedicatedBackendConnectionEnabled,omitempty" tf:"dedicated_backend_connection_enabled,omitempty"`
 
 	// Host header to be sent to the backend servers. Cannot be set if pick_host_name_from_backend_address is set to true.
 	// +kubebuilder:validation:Optional
@@ -842,8 +852,8 @@ type FrontendIPConfigurationInitParameters struct {
 	PrivateLinkConfigurationName *string `json:"privateLinkConfigurationName,omitempty" tf:"private_link_configuration_name,omitempty"`
 
 	// The ID of a Public IP Address which the Application Gateway should use. The allocation method for the Public IP Address depends on the sku of this Application Gateway. Please refer to the Azure documentation for public IP addresses for details.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta1.PublicIP
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.PublicIP
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
 
 	// Reference to a PublicIP in network to populate publicIpAddressId.
@@ -855,8 +865,8 @@ type FrontendIPConfigurationInitParameters struct {
 	PublicIPAddressIDSelector *v1.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Subnet.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate subnetId.
@@ -923,8 +933,8 @@ type FrontendIPConfigurationParameters struct {
 	PrivateLinkConfigurationName *string `json:"privateLinkConfigurationName,omitempty" tf:"private_link_configuration_name,omitempty"`
 
 	// The ID of a Public IP Address which the Application Gateway should use. The allocation method for the Public IP Address depends on the sku of this Application Gateway. Please refer to the Azure documentation for public IP addresses for details.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta1.PublicIP
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta1.PublicIP
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
 
@@ -937,8 +947,8 @@ type FrontendIPConfigurationParameters struct {
 	PublicIPAddressIDSelector *v1.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Subnet.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -993,7 +1003,7 @@ type GatewayIPConfigurationInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the Subnet which the Application Gateway should be connected to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -1034,7 +1044,7 @@ type GatewayIPConfigurationParameters struct {
 	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The ID of the Subnet which the Application Gateway should be connected to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -1261,8 +1271,8 @@ type IPConfigurationInitParameters struct {
 	PrivateIPAddressAllocation *string `json:"privateIpAddressAllocation,omitempty" tf:"private_ip_address_allocation,omitempty"`
 
 	// The ID of the subnet the private link configuration should connect to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate subnetId.
@@ -1311,8 +1321,8 @@ type IPConfigurationParameters struct {
 	PrivateIPAddressAllocation *string `json:"privateIpAddressAllocation" tf:"private_ip_address_allocation,omitempty"`
 
 	// The ID of the subnet the private link configuration should connect to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -2243,7 +2253,7 @@ type SkuInitParameters struct {
 	// The Capacity of the SKU to use for this Application Gateway. When using a V1 SKU this value must be between 1 and 32, and 1 to 125 for a V2 SKU. When using a Basic SKU this property must be between 1 and 2. This property is optional if autoscale_configuration is set.
 	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
-	// The Name of the SKU to use for this Application Gateway. Possible values are Basic, Standard_v2, and WAF_v2.
+	// The Name of the SKU to use for this Application Gateway. Possible values are Basic, Standard_Small, Standard_Medium, Standard_Large, Standard_v2, WAF_Large, WAF_Medium and WAF_v2.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The Tier of the SKU to use for this Application Gateway. Possible values are Basic, Standard_v2, and WAF_v2.
@@ -2255,7 +2265,7 @@ type SkuObservation struct {
 	// The Capacity of the SKU to use for this Application Gateway. When using a V1 SKU this value must be between 1 and 32, and 1 to 125 for a V2 SKU. When using a Basic SKU this property must be between 1 and 2. This property is optional if autoscale_configuration is set.
 	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
-	// The Name of the SKU to use for this Application Gateway. Possible values are Basic, Standard_v2, and WAF_v2.
+	// The Name of the SKU to use for this Application Gateway. Possible values are Basic, Standard_Small, Standard_Medium, Standard_Large, Standard_v2, WAF_Large, WAF_Medium and WAF_v2.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The Tier of the SKU to use for this Application Gateway. Possible values are Basic, Standard_v2, and WAF_v2.
@@ -2268,7 +2278,7 @@ type SkuParameters struct {
 	// +kubebuilder:validation:Optional
 	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
-	// The Name of the SKU to use for this Application Gateway. Possible values are Basic, Standard_v2, and WAF_v2.
+	// The Name of the SKU to use for this Application Gateway. Possible values are Basic, Standard_Small, Standard_Medium, Standard_Large, Standard_v2, WAF_Large, WAF_Medium and WAF_v2.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 

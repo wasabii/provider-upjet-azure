@@ -145,6 +145,12 @@ spec:
                 required:
                 - name
                 type: object
+              storageUseAzureAD:
+                description: |-
+                  StorageUseAzureAD configures Provider to use AzureAD
+                  to connect to the Storage Blob & Queue APIs,
+                  rather than the SharedKey from the Storage Account.
+                type: boolean
               subscriptionID:
                 description: |-
                   SubscriptionID is the Azure subscription ID to be used.

@@ -2019,7 +2019,7 @@ type LinuxWebAppInitParameters struct {
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The ID of the Service Plan that this Linux App Service will be created in.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/web/v1beta1.ServicePlan
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/web/v1beta1.ServicePlan
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ServicePlanID *string `json:"servicePlanId,omitempty" tf:"service_plan_id,omitempty"`
 
@@ -2048,8 +2048,8 @@ type LinuxWebAppInitParameters struct {
 	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
 
 	// The subnet id which will be used by this Web App for regional virtual network integration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
@@ -2059,6 +2059,9 @@ type LinuxWebAppInitParameters struct {
 	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+
+	// Should the traffic for the image pull be routed over virtual network enabled. Defaults to false.
+	VnetImagePullEnabled *bool `json:"vnetImagePullEnabled,omitempty" tf:"vnet_image_pull_enabled,omitempty"`
 
 	// Should the default WebDeploy Basic Authentication publishing credentials enabled. Defaults to true.
 	WebdeployPublishBasicAuthenticationEnabled *bool `json:"webdeployPublishBasicAuthenticationEnabled,omitempty" tf:"webdeploy_publish_basic_authentication_enabled,omitempty"`
@@ -2172,6 +2175,9 @@ type LinuxWebAppObservation struct {
 	// The subnet id which will be used by this Web App for regional virtual network integration.
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
+	// Should the traffic for the image pull be routed over virtual network enabled. Defaults to false.
+	VnetImagePullEnabled *bool `json:"vnetImagePullEnabled,omitempty" tf:"vnet_image_pull_enabled,omitempty"`
+
 	// Should the default WebDeploy Basic Authentication publishing credentials enabled. Defaults to true.
 	WebdeployPublishBasicAuthenticationEnabled *bool `json:"webdeployPublishBasicAuthenticationEnabled,omitempty" tf:"webdeploy_publish_basic_authentication_enabled,omitempty"`
 
@@ -2253,7 +2259,7 @@ type LinuxWebAppParameters struct {
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the Resource Group where the Linux Web App should exist. Changing this forces a new Linux Web App to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -2266,7 +2272,7 @@ type LinuxWebAppParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The ID of the Service Plan that this Linux App Service will be created in.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/web/v1beta1.ServicePlan
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/web/v1beta1.ServicePlan
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ServicePlanID *string `json:"servicePlanId,omitempty" tf:"service_plan_id,omitempty"`
@@ -2301,8 +2307,8 @@ type LinuxWebAppParameters struct {
 	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
 
 	// The subnet id which will be used by this Web App for regional virtual network integration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
@@ -2313,6 +2319,10 @@ type LinuxWebAppParameters struct {
 	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+
+	// Should the traffic for the image pull be routed over virtual network enabled. Defaults to false.
+	// +kubebuilder:validation:Optional
+	VnetImagePullEnabled *bool `json:"vnetImagePullEnabled,omitempty" tf:"vnet_image_pull_enabled,omitempty"`
 
 	// Should the default WebDeploy Basic Authentication publishing credentials enabled. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -2338,7 +2348,7 @@ type LinuxWebAppSiteConfigApplicationStackInitParameters struct {
 	// The User Name to use for authentication against the registry to pull the image.
 	DockerRegistryUsername *string `json:"dockerRegistryUsername,omitempty" tf:"docker_registry_username,omitempty"`
 
-	// The version of .NET to use. Possible values include 3.1, 5.0, 6.0, 7.0, 8.0 and 9.0.
+	// The version of .NET to use. Possible values include 3.1, 5.0, 6.0, 7.0, 8.0, 9.0and 10.0.
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
 	// The version of Go to use. Possible values include 1.18, and 1.19.
@@ -2356,7 +2366,7 @@ type LinuxWebAppSiteConfigApplicationStackInitParameters struct {
 	// The version of Node to run. Possible values include 12-lts, 14-lts, 16-lts, 18-lts, 20-lts and 22-lts. This property conflicts with java_version.
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
-	// The version of PHP to run. Possible values are 7.4, 8.0, 8.1, 8.2 and 8.3.
+	// The version of PHP to run. Possible values are 7.4, 8.0, 8.1, 8.2, 8.3 and 8.4.
 	PHPVersion *string `json:"phpVersion,omitempty" tf:"php_version,omitempty"`
 
 	// The version of Python to run. Possible values include 3.13, 3.12, 3.11, 3.10, 3.9, 3.8 and 3.7.
@@ -2377,7 +2387,7 @@ type LinuxWebAppSiteConfigApplicationStackObservation struct {
 	// The User Name to use for authentication against the registry to pull the image.
 	DockerRegistryUsername *string `json:"dockerRegistryUsername,omitempty" tf:"docker_registry_username,omitempty"`
 
-	// The version of .NET to use. Possible values include 3.1, 5.0, 6.0, 7.0, 8.0 and 9.0.
+	// The version of .NET to use. Possible values include 3.1, 5.0, 6.0, 7.0, 8.0, 9.0and 10.0.
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
 	// The version of Go to use. Possible values include 1.18, and 1.19.
@@ -2395,7 +2405,7 @@ type LinuxWebAppSiteConfigApplicationStackObservation struct {
 	// The version of Node to run. Possible values include 12-lts, 14-lts, 16-lts, 18-lts, 20-lts and 22-lts. This property conflicts with java_version.
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
-	// The version of PHP to run. Possible values are 7.4, 8.0, 8.1, 8.2 and 8.3.
+	// The version of PHP to run. Possible values are 7.4, 8.0, 8.1, 8.2, 8.3 and 8.4.
 	PHPVersion *string `json:"phpVersion,omitempty" tf:"php_version,omitempty"`
 
 	// The version of Python to run. Possible values include 3.13, 3.12, 3.11, 3.10, 3.9, 3.8 and 3.7.
@@ -2423,7 +2433,7 @@ type LinuxWebAppSiteConfigApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	DockerRegistryUsername *string `json:"dockerRegistryUsername,omitempty" tf:"docker_registry_username,omitempty"`
 
-	// The version of .NET to use. Possible values include 3.1, 5.0, 6.0, 7.0, 8.0 and 9.0.
+	// The version of .NET to use. Possible values include 3.1, 5.0, 6.0, 7.0, 8.0, 9.0and 10.0.
 	// +kubebuilder:validation:Optional
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
@@ -2447,7 +2457,7 @@ type LinuxWebAppSiteConfigApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
-	// The version of PHP to run. Possible values are 7.4, 8.0, 8.1, 8.2 and 8.3.
+	// The version of PHP to run. Possible values are 7.4, 8.0, 8.1, 8.2, 8.3 and 8.4.
 	// +kubebuilder:validation:Optional
 	PHPVersion *string `json:"phpVersion,omitempty" tf:"php_version,omitempty"`
 
@@ -2578,8 +2588,8 @@ type LinuxWebAppSiteConfigIPRestrictionInitParameters struct {
 
 	// The subnet id which will be used by this Web App for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
@@ -2663,8 +2673,8 @@ type LinuxWebAppSiteConfigIPRestrictionParameters struct {
 
 	// The subnet id which will be used by this Web App for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
@@ -2752,7 +2762,7 @@ type LinuxWebAppSiteConfigInitParameters struct {
 	// The Default action for traffic that does not match any scm_ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
 	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
 
-	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
+	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values are 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
 	ScmMinimumTLSVersion *string `json:"scmMinimumTlsVersion,omitempty" tf:"scm_minimum_tls_version,omitempty"`
 
 	// Should the Linux Web App ip_restriction configuration be used for the SCM also.
@@ -2852,7 +2862,7 @@ type LinuxWebAppSiteConfigObservation struct {
 	// The Default action for traffic that does not match any scm_ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
 	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
 
-	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
+	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values are 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
 	ScmMinimumTLSVersion *string `json:"scmMinimumTlsVersion,omitempty" tf:"scm_minimum_tls_version,omitempty"`
 
 	ScmType *string `json:"scmType,omitempty" tf:"scm_type,omitempty"`
@@ -2973,7 +2983,7 @@ type LinuxWebAppSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
 
-	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
+	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values are 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
 	// +kubebuilder:validation:Optional
 	ScmMinimumTLSVersion *string `json:"scmMinimumTlsVersion,omitempty" tf:"scm_minimum_tls_version,omitempty"`
 
@@ -3079,8 +3089,8 @@ type LinuxWebAppSiteConfigScmIPRestrictionInitParameters struct {
 
 	// The subnet id which will be used by this Web App for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
@@ -3164,8 +3174,8 @@ type LinuxWebAppSiteConfigScmIPRestrictionParameters struct {
 
 	// The subnet id which will be used by this Web App for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 

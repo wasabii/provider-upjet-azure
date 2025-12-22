@@ -26,7 +26,7 @@ type EnvironmentCustomDomainInitParameters struct {
 
 	// The ID of the Container Apps Managed Environment. Changing this forces a new resource to be created.
 	// The Container App Managed Environment ID to configure this Custom Domain on.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/containerapp/v1beta1.Environment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/containerapp/v1beta1.Environment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ContainerAppEnvironmentID *string `json:"containerAppEnvironmentId,omitempty" tf:"container_app_environment_id,omitempty"`
 
@@ -57,6 +57,7 @@ type EnvironmentCustomDomainObservation struct {
 	// The Custom Domain DNS suffix for this Container App Environment.
 	DNSSuffix *string `json:"dnsSuffix,omitempty" tf:"dns_suffix,omitempty"`
 
+	// The ID of the Container App Environment Custom Domain Suffix.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -74,7 +75,7 @@ type EnvironmentCustomDomainParameters struct {
 
 	// The ID of the Container Apps Managed Environment. Changing this forces a new resource to be created.
 	// The Container App Managed Environment ID to configure this Custom Domain on.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/containerapp/v1beta1.Environment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/containerapp/v1beta1.Environment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ContainerAppEnvironmentID *string `json:"containerAppEnvironmentId,omitempty" tf:"container_app_environment_id,omitempty"`

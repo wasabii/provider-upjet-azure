@@ -115,7 +115,7 @@ type DiffDiskSettingsInitParameters struct {
 	// Specifies the Ephemeral Disk Settings for the OS Disk. At this time the only possible value is Local. Changing this forces a new resource to be created.
 	Option *string `json:"option,omitempty" tf:"option,omitempty"`
 
-	// Specifies where to store the Ephemeral Disk. Possible values are CacheDisk and ResourceDisk. Defaults to CacheDisk. Changing this forces a new resource to be created.
+	// Specifies where to store the Ephemeral Disk. Possible values are CacheDisk, ResourceDisk and NvmeDisk. Defaults to CacheDisk. Changing this forces a new resource to be created.
 	Placement *string `json:"placement,omitempty" tf:"placement,omitempty"`
 }
 
@@ -124,7 +124,7 @@ type DiffDiskSettingsObservation struct {
 	// Specifies the Ephemeral Disk Settings for the OS Disk. At this time the only possible value is Local. Changing this forces a new resource to be created.
 	Option *string `json:"option,omitempty" tf:"option,omitempty"`
 
-	// Specifies where to store the Ephemeral Disk. Possible values are CacheDisk and ResourceDisk. Defaults to CacheDisk. Changing this forces a new resource to be created.
+	// Specifies where to store the Ephemeral Disk. Possible values are CacheDisk, ResourceDisk and NvmeDisk. Defaults to CacheDisk. Changing this forces a new resource to be created.
 	Placement *string `json:"placement,omitempty" tf:"placement,omitempty"`
 }
 
@@ -134,7 +134,7 @@ type DiffDiskSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	Option *string `json:"option" tf:"option,omitempty"`
 
-	// Specifies where to store the Ephemeral Disk. Possible values are CacheDisk and ResourceDisk. Defaults to CacheDisk. Changing this forces a new resource to be created.
+	// Specifies where to store the Ephemeral Disk. Possible values are CacheDisk, ResourceDisk and NvmeDisk. Defaults to CacheDisk. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Placement *string `json:"placement,omitempty" tf:"placement,omitempty"`
 }
@@ -321,8 +321,8 @@ type LinuxVirtualMachineInitParameters struct {
 	MaxBidPrice *float64 `json:"maxBidPrice,omitempty" tf:"max_bid_price,omitempty"`
 
 	// . A list of Network Interface IDs which should be attached to this Virtual Machine. The first Network Interface ID in this list will be the Primary Network Interface on the Virtual Machine.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.NetworkInterface
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.NetworkInterface
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	NetworkInterfaceIds []*string `json:"networkInterfaceIds,omitempty" tf:"network_interface_ids,omitempty"`
 
 	// References to NetworkInterface in network to populate networkInterfaceIds.
@@ -338,6 +338,9 @@ type LinuxVirtualMachineInitParameters struct {
 
 	// A os_image_notification block as defined below.
 	OsImageNotification *OsImageNotificationInitParameters `json:"osImageNotification,omitempty" tf:"os_image_notification,omitempty"`
+
+	// The ID of an existing Managed Disk to use as the OS Disk for this Linux Virtual Machine. Changing this forces a new resource to be created.
+	OsManagedDiskID *string `json:"osManagedDiskId,omitempty" tf:"os_managed_disk_id,omitempty"`
 
 	// Specifies the mode of VM Guest Patching for the Virtual Machine. Possible values are AutomaticByPlatform or ImageDefault. Defaults to ImageDefault.
 	PatchAssessmentMode *string `json:"patchAssessmentMode,omitempty" tf:"patch_assessment_mode,omitempty"`
@@ -480,6 +483,9 @@ type LinuxVirtualMachineObservation struct {
 
 	// A os_image_notification block as defined below.
 	OsImageNotification *OsImageNotificationObservation `json:"osImageNotification,omitempty" tf:"os_image_notification,omitempty"`
+
+	// The ID of an existing Managed Disk to use as the OS Disk for this Linux Virtual Machine. Changing this forces a new resource to be created.
+	OsManagedDiskID *string `json:"osManagedDiskId,omitempty" tf:"os_managed_disk_id,omitempty"`
 
 	// Specifies the mode of VM Guest Patching for the Virtual Machine. Possible values are AutomaticByPlatform or ImageDefault. Defaults to ImageDefault.
 	PatchAssessmentMode *string `json:"patchAssessmentMode,omitempty" tf:"patch_assessment_mode,omitempty"`
@@ -656,7 +662,7 @@ type LinuxVirtualMachineOsDiskParameters struct {
 
 	// The Type of Storage Account which should back this the Internal OS Disk. Possible values are Standard_LRS, StandardSSD_LRS, Premium_LRS, StandardSSD_ZRS and Premium_ZRS. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	StorageAccountType *string `json:"storageAccountType" tf:"storage_account_type,omitempty"`
+	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
 
 	// Should Write Accelerator be Enabled for this OS Disk? Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -762,8 +768,8 @@ type LinuxVirtualMachineParameters struct {
 	MaxBidPrice *float64 `json:"maxBidPrice,omitempty" tf:"max_bid_price,omitempty"`
 
 	// . A list of Network Interface IDs which should be attached to this Virtual Machine. The first Network Interface ID in this list will be the Primary Network Interface on the Virtual Machine.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.NetworkInterface
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.NetworkInterface
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIds []*string `json:"networkInterfaceIds,omitempty" tf:"network_interface_ids,omitempty"`
 
@@ -782,6 +788,10 @@ type LinuxVirtualMachineParameters struct {
 	// A os_image_notification block as defined below.
 	// +kubebuilder:validation:Optional
 	OsImageNotification *OsImageNotificationParameters `json:"osImageNotification,omitempty" tf:"os_image_notification,omitempty"`
+
+	// The ID of an existing Managed Disk to use as the OS Disk for this Linux Virtual Machine. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	OsManagedDiskID *string `json:"osManagedDiskId,omitempty" tf:"os_managed_disk_id,omitempty"`
 
 	// Specifies the mode of VM Guest Patching for the Virtual Machine. Possible values are AutomaticByPlatform or ImageDefault. Defaults to ImageDefault.
 	// +kubebuilder:validation:Optional
@@ -816,7 +826,7 @@ type LinuxVirtualMachineParameters struct {
 	RebootSetting *string `json:"rebootSetting,omitempty" tf:"reboot_setting,omitempty"`
 
 	// The name of the Resource Group in which the Linux Virtual Machine should be exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -1079,7 +1089,6 @@ type LinuxVirtualMachineStatus struct {
 type LinuxVirtualMachine struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.adminUsername) || (has(self.initProvider) && has(self.initProvider.adminUsername))",message="spec.forProvider.adminUsername is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.osDisk) || (has(self.initProvider) && has(self.initProvider.osDisk))",message="spec.forProvider.osDisk is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.size) || (has(self.initProvider) && has(self.initProvider.size))",message="spec.forProvider.size is a required parameter"

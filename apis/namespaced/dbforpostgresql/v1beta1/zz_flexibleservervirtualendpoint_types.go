@@ -16,14 +16,14 @@ import (
 
 type FlexibleServerVirtualEndpointInitParameters struct {
 
-	// The name of the Virtual Endpoint
+	// The name of the Virtual Endpoint. Changing this forces a new resource to be created.
 	// The name of the Virtual Endpoint
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The Resource ID of the Replica Postgres Flexible Server this should be associated with
 	// The Resource ID of the *Replica* Postgres Flexible Server this should be associated with
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/dbforpostgresql/v1beta1.FlexibleServer
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/dbforpostgresql/v1beta1.FlexibleServer
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	ReplicaServerID *string `json:"replicaServerId,omitempty" tf:"replica_server_id,omitempty"`
 
 	// Reference to a FlexibleServer in dbforpostgresql to populate replicaServerId.
@@ -34,10 +34,10 @@ type FlexibleServerVirtualEndpointInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ReplicaServerIDSelector *v1.NamespacedSelector `json:"replicaServerIdSelector,omitempty" tf:"-"`
 
-	// The Resource ID of the Source Postgres Flexible Server this should be associated with.
+	// The Resource ID of the Source Postgres Flexible Server this should be associated with. Changing this forces a new resource to be created.
 	// The Resource ID of the *Source* Postgres Flexible Server this should be associated with
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/dbforpostgresql/v1beta1.FlexibleServer
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/dbforpostgresql/v1beta1.FlexibleServer
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	SourceServerID *string `json:"sourceServerId,omitempty" tf:"source_server_id,omitempty"`
 
 	// Reference to a FlexibleServer in dbforpostgresql to populate sourceServerId.
@@ -48,7 +48,7 @@ type FlexibleServerVirtualEndpointInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceServerIDSelector *v1.NamespacedSelector `json:"sourceServerIdSelector,omitempty" tf:"-"`
 
-	// The type of Virtual Endpoint. Currently only ReadWrite is supported.
+	// The type of Virtual Endpoint. Currently only ReadWrite is supported. Changing this forces a new resource to be created.
 	// The type of Virtual Endpoint
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -58,7 +58,7 @@ type FlexibleServerVirtualEndpointObservation struct {
 	// The ID of the PostgreSQL Flexible Virtual Endpoint.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name of the Virtual Endpoint
+	// The name of the Virtual Endpoint. Changing this forces a new resource to be created.
 	// The name of the Virtual Endpoint
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -66,26 +66,26 @@ type FlexibleServerVirtualEndpointObservation struct {
 	// The Resource ID of the *Replica* Postgres Flexible Server this should be associated with
 	ReplicaServerID *string `json:"replicaServerId,omitempty" tf:"replica_server_id,omitempty"`
 
-	// The Resource ID of the Source Postgres Flexible Server this should be associated with.
+	// The Resource ID of the Source Postgres Flexible Server this should be associated with. Changing this forces a new resource to be created.
 	// The Resource ID of the *Source* Postgres Flexible Server this should be associated with
 	SourceServerID *string `json:"sourceServerId,omitempty" tf:"source_server_id,omitempty"`
 
-	// The type of Virtual Endpoint. Currently only ReadWrite is supported.
+	// The type of Virtual Endpoint. Currently only ReadWrite is supported. Changing this forces a new resource to be created.
 	// The type of Virtual Endpoint
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type FlexibleServerVirtualEndpointParameters struct {
 
-	// The name of the Virtual Endpoint
+	// The name of the Virtual Endpoint. Changing this forces a new resource to be created.
 	// The name of the Virtual Endpoint
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The Resource ID of the Replica Postgres Flexible Server this should be associated with
 	// The Resource ID of the *Replica* Postgres Flexible Server this should be associated with
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/dbforpostgresql/v1beta1.FlexibleServer
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/dbforpostgresql/v1beta1.FlexibleServer
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ReplicaServerID *string `json:"replicaServerId,omitempty" tf:"replica_server_id,omitempty"`
 
@@ -97,10 +97,10 @@ type FlexibleServerVirtualEndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	ReplicaServerIDSelector *v1.NamespacedSelector `json:"replicaServerIdSelector,omitempty" tf:"-"`
 
-	// The Resource ID of the Source Postgres Flexible Server this should be associated with.
+	// The Resource ID of the Source Postgres Flexible Server this should be associated with. Changing this forces a new resource to be created.
 	// The Resource ID of the *Source* Postgres Flexible Server this should be associated with
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/dbforpostgresql/v1beta1.FlexibleServer
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/dbforpostgresql/v1beta1.FlexibleServer
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceServerID *string `json:"sourceServerId,omitempty" tf:"source_server_id,omitempty"`
 
@@ -112,7 +112,7 @@ type FlexibleServerVirtualEndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceServerIDSelector *v1.NamespacedSelector `json:"sourceServerIdSelector,omitempty" tf:"-"`
 
-	// The type of Virtual Endpoint. Currently only ReadWrite is supported.
+	// The type of Virtual Endpoint. Currently only ReadWrite is supported. Changing this forces a new resource to be created.
 	// The type of Virtual Endpoint
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`

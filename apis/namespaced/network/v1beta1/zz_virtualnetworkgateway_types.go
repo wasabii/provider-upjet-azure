@@ -589,7 +589,7 @@ type VirtualNetworkGatewayIPConfigurationInitParameters struct {
 	PrivateIPAddressAllocation *string `json:"privateIpAddressAllocation,omitempty" tf:"private_ip_address_allocation,omitempty"`
 
 	// The ID of the public IP address to associate with the Virtual Network Gateway.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.PublicIP
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.PublicIP
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
 
@@ -602,8 +602,8 @@ type VirtualNetworkGatewayIPConfigurationInitParameters struct {
 	PublicIPAddressIDSelector *v1.NamespacedSelector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
 
 	// The ID of the gateway subnet of a virtual network in which the virtual network gateway will be created. It is mandatory that the associated subnet is named GatewaySubnet. Therefore, each virtual network can contain at most a single Virtual Network Gateway.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate subnetId.
@@ -641,7 +641,7 @@ type VirtualNetworkGatewayIPConfigurationParameters struct {
 	PrivateIPAddressAllocation *string `json:"privateIpAddressAllocation,omitempty" tf:"private_ip_address_allocation,omitempty"`
 
 	// The ID of the public IP address to associate with the Virtual Network Gateway.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.PublicIP
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.PublicIP
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
@@ -655,8 +655,8 @@ type VirtualNetworkGatewayIPConfigurationParameters struct {
 	PublicIPAddressIDSelector *v1.NamespacedSelector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
 
 	// The ID of the gateway subnet of a virtual network in which the virtual network gateway will be created. It is mandatory that the associated subnet is named GatewaySubnet. Therefore, each virtual network can contain at most a single Virtual Network Gateway.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -698,10 +698,7 @@ type VirtualNetworkGatewayInitParameters struct {
 	// The Generation of the Virtual Network gateway. Possible values include Generation1, Generation2 or None. Changing this forces a new resource to be created.
 	Generation *string `json:"generation,omitempty" tf:"generation,omitempty"`
 
-	// One or more (up to 3) ip_configuration blocks documented below. Changing this forces a new resource to be created.
-	// An active-standby gateway requires exactly one ip_configuration block,
-	// an active-active gateway requires exactly two ip_configuration blocks whereas
-	// an active-active zone redundant gateway with P2S configuration requires exactly three ip_configuration blocks.
+	// One or more (up to 3) ip_configuration blocks documented below. Changing this forces a new resource to be created. An active-standby gateway requires exactly one ip_configuration block, an active-active gateway requires exactly two ip_configuration blocks whereas an active-active zone redundant gateway with P2S configuration requires exactly three ip_configuration blocks.
 	IPConfiguration []VirtualNetworkGatewayIPConfigurationInitParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
 
 	// Is IP Sec Replay Protection enabled? Defaults to true.
@@ -771,10 +768,7 @@ type VirtualNetworkGatewayObservation struct {
 	// The ID of the Virtual Network Gateway.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// One or more (up to 3) ip_configuration blocks documented below. Changing this forces a new resource to be created.
-	// An active-standby gateway requires exactly one ip_configuration block,
-	// an active-active gateway requires exactly two ip_configuration blocks whereas
-	// an active-active zone redundant gateway with P2S configuration requires exactly three ip_configuration blocks.
+	// One or more (up to 3) ip_configuration blocks documented below. Changing this forces a new resource to be created. An active-standby gateway requires exactly one ip_configuration block, an active-active gateway requires exactly two ip_configuration blocks whereas an active-active zone redundant gateway with P2S configuration requires exactly three ip_configuration blocks.
 	IPConfiguration []VirtualNetworkGatewayIPConfigurationObservation `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
 
 	// Is IP Sec Replay Protection enabled? Defaults to true.
@@ -853,10 +847,7 @@ type VirtualNetworkGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	Generation *string `json:"generation,omitempty" tf:"generation,omitempty"`
 
-	// One or more (up to 3) ip_configuration blocks documented below. Changing this forces a new resource to be created.
-	// An active-standby gateway requires exactly one ip_configuration block,
-	// an active-active gateway requires exactly two ip_configuration blocks whereas
-	// an active-active zone redundant gateway with P2S configuration requires exactly three ip_configuration blocks.
+	// One or more (up to 3) ip_configuration blocks documented below. Changing this forces a new resource to be created. An active-standby gateway requires exactly one ip_configuration block, an active-active gateway requires exactly two ip_configuration blocks whereas an active-active zone redundant gateway with P2S configuration requires exactly three ip_configuration blocks.
 	// +kubebuilder:validation:Optional
 	IPConfiguration []VirtualNetworkGatewayIPConfigurationParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
 
@@ -881,7 +872,7 @@ type VirtualNetworkGatewayParameters struct {
 	RemoteVnetTrafficEnabled *bool `json:"remoteVnetTrafficEnabled,omitempty" tf:"remote_vnet_traffic_enabled,omitempty"`
 
 	// The name of the resource group in which to create the Virtual Network Gateway. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

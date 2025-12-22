@@ -216,7 +216,7 @@ type AppWorkflowParameters struct {
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The name of the Resource Group in which the Logic App Workflow should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -390,7 +390,7 @@ type TriggerParameters struct {
 	// A list of the allowed caller IP address ranges.
 	// +kubebuilder:validation:Optional
 	// +listType=set
-	AllowedCallerIPAddressRange []*string `json:"allowedCallerIpAddressRange" tf:"allowed_caller_ip_address_range,omitempty"`
+	AllowedCallerIPAddressRange []*string `json:"allowedCallerIpAddressRange,omitempty" tf:"allowed_caller_ip_address_range,omitempty"`
 
 	// A open_authentication_policy block as defined below.
 	// +kubebuilder:validation:Optional

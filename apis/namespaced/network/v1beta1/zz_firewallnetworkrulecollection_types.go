@@ -34,6 +34,7 @@ type FirewallNetworkRuleCollectionObservation struct {
 	// Specifies the name of the Firewall in which the Network Rule Collection should be created. Changing this forces a new resource to be created.
 	AzureFirewallName *string `json:"azureFirewallName,omitempty" tf:"azure_firewall_name,omitempty"`
 
+	// The ID of the Firewall Network Rule Collection.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Specifies the priority of the rule collection. Possible values are between 100 - 65000.
@@ -53,7 +54,7 @@ type FirewallNetworkRuleCollectionParameters struct {
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// Specifies the name of the Firewall in which the Network Rule Collection should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Firewall
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Firewall
 	// +kubebuilder:validation:Optional
 	AzureFirewallName *string `json:"azureFirewallName,omitempty" tf:"azure_firewall_name,omitempty"`
 
@@ -70,7 +71,7 @@ type FirewallNetworkRuleCollectionParameters struct {
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// Specifies the name of the Resource Group in which the Firewall exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

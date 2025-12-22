@@ -1903,7 +1903,7 @@ type LinuxFunctionAppSlotInitParameters struct {
 
 	// The backend storage account name which will be used by this Function App Slot.
 	// The backend storage account name which will be used by this Function App Slot.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
 	// Reference to a Account in storage to populate storageAccountName.
@@ -1930,8 +1930,8 @@ type LinuxFunctionAppSlotInitParameters struct {
 	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
 
 	// The subnet id which will be used by this Function App Slot for regional virtual network integration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
@@ -2150,7 +2150,7 @@ type LinuxFunctionAppSlotParameters struct {
 
 	// The ID of the Linux Function App this Slot is a member of. Changing this forces a new resource to be created.
 	// The ID of the Linux Function App this Slot is a member of.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/web/v1beta2.LinuxFunctionApp
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/web/v1beta2.LinuxFunctionApp
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	FunctionAppID *string `json:"functionAppId,omitempty" tf:"function_app_id,omitempty"`
@@ -2205,7 +2205,7 @@ type LinuxFunctionAppSlotParameters struct {
 
 	// The backend storage account name which will be used by this Function App Slot.
 	// The backend storage account name which will be used by this Function App Slot.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
@@ -2237,8 +2237,8 @@ type LinuxFunctionAppSlotParameters struct {
 	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
 
 	// The subnet id which will be used by this Function App Slot for regional virtual network integration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
@@ -2378,8 +2378,8 @@ type LinuxFunctionAppSlotSiteConfigIPRestrictionInitParameters struct {
 
 	// The subnet id which will be used by this Function App Slot for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
@@ -2463,8 +2463,8 @@ type LinuxFunctionAppSlotSiteConfigIPRestrictionParameters struct {
 
 	// The subnet id which will be used by this Function App Slot for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
@@ -3014,8 +3014,8 @@ type LinuxFunctionAppSlotSiteConfigScmIPRestrictionInitParameters struct {
 
 	// The subnet id which will be used by this Function App Slot for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
@@ -3099,8 +3099,8 @@ type LinuxFunctionAppSlotSiteConfigScmIPRestrictionParameters struct {
 
 	// The subnet id which will be used by this Function App Slot for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
@@ -3235,11 +3235,11 @@ type SiteConfigApplicationStackInitParameters struct {
 	// A docker block
 	Docker []ApplicationStackDockerInitParameters `json:"docker,omitempty" tf:"docker,omitempty"`
 
-	// The version of .Net. Possible values are 3.1, 6.0, 7.0, 8.0 and 9.0.
+	// The version of .Net. Possible values are 3.1, 6.0, 7.0, 8.0, 9.0 and 10.0.
 	// The version of .Net. Possible values are `3.1`, `6.0`, `7.0`, `8.0` and `9.0`
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
-	// The version of Java to use. Possible values are 8, 11 & 17 (In-Preview).
+	// The version of Java to use. Possible values are 8, 11, 17 and 21.
 	// The version of Java to use. Possible values are `8`, `11`, `17`, and `21`
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
@@ -3269,11 +3269,11 @@ type SiteConfigApplicationStackObservation struct {
 	// A docker block
 	Docker []ApplicationStackDockerObservation `json:"docker,omitempty" tf:"docker,omitempty"`
 
-	// The version of .Net. Possible values are 3.1, 6.0, 7.0, 8.0 and 9.0.
+	// The version of .Net. Possible values are 3.1, 6.0, 7.0, 8.0, 9.0 and 10.0.
 	// The version of .Net. Possible values are `3.1`, `6.0`, `7.0`, `8.0` and `9.0`
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
-	// The version of Java to use. Possible values are 8, 11 & 17 (In-Preview).
+	// The version of Java to use. Possible values are 8, 11, 17 and 21.
 	// The version of Java to use. Possible values are `8`, `11`, `17`, and `21`
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
@@ -3304,12 +3304,12 @@ type SiteConfigApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	Docker []ApplicationStackDockerParameters `json:"docker,omitempty" tf:"docker,omitempty"`
 
-	// The version of .Net. Possible values are 3.1, 6.0, 7.0, 8.0 and 9.0.
+	// The version of .Net. Possible values are 3.1, 6.0, 7.0, 8.0, 9.0 and 10.0.
 	// The version of .Net. Possible values are `3.1`, `6.0`, `7.0`, `8.0` and `9.0`
 	// +kubebuilder:validation:Optional
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
-	// The version of Java to use. Possible values are 8, 11 & 17 (In-Preview).
+	// The version of Java to use. Possible values are 8, 11, 17 and 21.
 	// The version of Java to use. Possible values are `8`, `11`, `17`, and `21`
 	// +kubebuilder:validation:Optional
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`

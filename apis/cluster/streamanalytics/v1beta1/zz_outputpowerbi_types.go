@@ -25,8 +25,8 @@ type OutputPowerBIInitParameters struct {
 	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
 
 	// The ID of the Stream Analytics Job. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/streamanalytics/v1beta2.Job
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/streamanalytics/v1beta2.Job
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	StreamAnalyticsJobID *string `json:"streamAnalyticsJobId,omitempty" tf:"stream_analytics_job_id,omitempty"`
 
 	// Reference to a Job in streamanalytics to populate streamAnalyticsJobId.
@@ -58,6 +58,7 @@ type OutputPowerBIObservation struct {
 	// The name of the Power BI group. Use this property to help remember which specific Power BI group id was used.
 	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
 
+	// The ID of the Stream Analytics Output to Power BI resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The ID of the Stream Analytics Job. Changing this forces a new resource to be created.
@@ -88,8 +89,8 @@ type OutputPowerBIParameters struct {
 	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
 
 	// The ID of the Stream Analytics Job. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/streamanalytics/v1beta2.Job
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/streamanalytics/v1beta2.Job
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StreamAnalyticsJobID *string `json:"streamAnalyticsJobId,omitempty" tf:"stream_analytics_job_id,omitempty"`
 

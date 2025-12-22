@@ -2307,7 +2307,7 @@ type WindowsWebAppInitParameters struct {
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The ID of the Service Plan that this Windows App Service will be created in.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/web/v1beta1.ServicePlan
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/web/v1beta1.ServicePlan
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ServicePlanID *string `json:"servicePlanId,omitempty" tf:"service_plan_id,omitempty"`
 
@@ -2335,9 +2335,12 @@ type WindowsWebAppInitParameters struct {
 	// Whether backup and restore operations over the linked virtual network are enabled. Defaults to false.
 	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
 
+	// Whether traffic for the image pull should be routed over the virtual network.
+	VirtualNetworkImagePullEnabled *bool `json:"virtualNetworkImagePullEnabled,omitempty" tf:"virtual_network_image_pull_enabled,omitempty"`
+
 	// The subnet id which will be used by this Web App for regional virtual network integration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
@@ -2590,6 +2593,9 @@ type WindowsWebAppObservation struct {
 	// Whether backup and restore operations over the linked virtual network are enabled. Defaults to false.
 	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
 
+	// Whether traffic for the image pull should be routed over the virtual network.
+	VirtualNetworkImagePullEnabled *bool `json:"virtualNetworkImagePullEnabled,omitempty" tf:"virtual_network_image_pull_enabled,omitempty"`
+
 	// The subnet id which will be used by this Web App for regional virtual network integration.
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
@@ -2674,7 +2680,7 @@ type WindowsWebAppParameters struct {
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the Resource Group where the Windows Web App should exist. Changing this forces a new Windows Web App to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -2687,7 +2693,7 @@ type WindowsWebAppParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The ID of the Service Plan that this Windows App Service will be created in.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/web/v1beta1.ServicePlan
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/web/v1beta1.ServicePlan
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ServicePlanID *string `json:"servicePlanId,omitempty" tf:"service_plan_id,omitempty"`
@@ -2721,9 +2727,13 @@ type WindowsWebAppParameters struct {
 	// +kubebuilder:validation:Optional
 	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
 
+	// Whether traffic for the image pull should be routed over the virtual network.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkImagePullEnabled *bool `json:"virtualNetworkImagePullEnabled,omitempty" tf:"virtual_network_image_pull_enabled,omitempty"`
+
 	// The subnet id which will be used by this Web App for regional virtual network integration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
@@ -2766,7 +2776,7 @@ type WindowsWebAppSiteConfigApplicationStackInitParameters struct {
 	// The version of DotNetCore to use.
 	DotnetCoreVersion *string `json:"dotnetCoreVersion,omitempty" tf:"dotnet_core_version,omitempty"`
 
-	// The version of .NET to use when current_stack is set to dotnet. Possible values include v2.0,v3.0, v4.0, v5.0, v6.0, v7.0, v8.0 and v9.0.
+	// The version of .NET to use when current_stack is set to dotnet. Possible values include v2.0,v3.0, v4.0, v5.0, v6.0, v7.0, v8.0, v9.0 and v10.0.
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
 	JavaContainer *string `json:"javaContainer,omitempty" tf:"java_container,omitempty"`
@@ -2811,7 +2821,7 @@ type WindowsWebAppSiteConfigApplicationStackObservation struct {
 	// The version of DotNetCore to use.
 	DotnetCoreVersion *string `json:"dotnetCoreVersion,omitempty" tf:"dotnet_core_version,omitempty"`
 
-	// The version of .NET to use when current_stack is set to dotnet. Possible values include v2.0,v3.0, v4.0, v5.0, v6.0, v7.0, v8.0 and v9.0.
+	// The version of .NET to use when current_stack is set to dotnet. Possible values include v2.0,v3.0, v4.0, v5.0, v6.0, v7.0, v8.0, v9.0 and v10.0.
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
 	JavaContainer *string `json:"javaContainer,omitempty" tf:"java_container,omitempty"`
@@ -2865,7 +2875,7 @@ type WindowsWebAppSiteConfigApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	DotnetCoreVersion *string `json:"dotnetCoreVersion,omitempty" tf:"dotnet_core_version,omitempty"`
 
-	// The version of .NET to use when current_stack is set to dotnet. Possible values include v2.0,v3.0, v4.0, v5.0, v6.0, v7.0, v8.0 and v9.0.
+	// The version of .NET to use when current_stack is set to dotnet. Possible values include v2.0,v3.0, v4.0, v5.0, v6.0, v7.0, v8.0, v9.0 and v10.0.
 	// +kubebuilder:validation:Optional
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
@@ -3048,8 +3058,8 @@ type WindowsWebAppSiteConfigIPRestrictionInitParameters struct {
 
 	// The subnet id which will be used by this Web App for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
@@ -3133,8 +3143,8 @@ type WindowsWebAppSiteConfigIPRestrictionParameters struct {
 
 	// The subnet id which will be used by this Web App for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
@@ -3225,7 +3235,7 @@ type WindowsWebAppSiteConfigInitParameters struct {
 	// The Default action for traffic that does not match any scm_ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
 	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
 
-	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
+	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values are 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
 	ScmMinimumTLSVersion *string `json:"scmMinimumTlsVersion,omitempty" tf:"scm_minimum_tls_version,omitempty"`
 
 	// Should the Windows Web App ip_restriction configuration be used for the SCM also.
@@ -3331,7 +3341,7 @@ type WindowsWebAppSiteConfigObservation struct {
 	// The Default action for traffic that does not match any scm_ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
 	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
 
-	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
+	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values are 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
 	ScmMinimumTLSVersion *string `json:"scmMinimumTlsVersion,omitempty" tf:"scm_minimum_tls_version,omitempty"`
 
 	ScmType *string `json:"scmType,omitempty" tf:"scm_type,omitempty"`
@@ -3461,7 +3471,7 @@ type WindowsWebAppSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
 
-	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
+	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values are 1.0, 1.1, 1.2 and 1.3. Defaults to 1.2.
 	// +kubebuilder:validation:Optional
 	ScmMinimumTLSVersion *string `json:"scmMinimumTlsVersion,omitempty" tf:"scm_minimum_tls_version,omitempty"`
 
@@ -3571,8 +3581,8 @@ type WindowsWebAppSiteConfigScmIPRestrictionInitParameters struct {
 
 	// The subnet id which will be used by this Web App for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
@@ -3656,8 +3666,8 @@ type WindowsWebAppSiteConfigScmIPRestrictionParameters struct {
 
 	// The subnet id which will be used by this Web App for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 

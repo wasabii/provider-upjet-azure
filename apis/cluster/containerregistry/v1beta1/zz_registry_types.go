@@ -16,7 +16,7 @@ import (
 type EncryptionInitParameters struct {
 
 	// The client ID of the managed identity associated with the encryption key.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("client_id",true)
 	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id"`
 
@@ -44,7 +44,7 @@ type EncryptionObservation struct {
 type EncryptionParameters struct {
 
 	// The client ID of the managed identity associated with the encryption key.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("client_id",true)
 	// +kubebuilder:validation:Optional
 	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id"`
@@ -146,7 +146,7 @@ type IPRuleParameters struct {
 type IdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Container Registry.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
@@ -182,7 +182,7 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Container Registry.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -268,7 +268,7 @@ type RegistryInitParameters struct {
 	// Boolean value that indicates whether quarantine policy is enabled.
 	QuarantinePolicyEnabled *bool `json:"quarantinePolicyEnabled,omitempty" tf:"quarantine_policy_enabled,omitempty"`
 
-	// The number of days to retain and untagged manifest after which it gets purged. Defaults to 7.
+	// The number of days to retain and untagged manifest after which it gets purged.
 	RetentionPolicyInDays *float64 `json:"retentionPolicyInDays,omitempty" tf:"retention_policy_in_days,omitempty"`
 
 	// The SKU name of the container registry. Possible values are Basic, Standard and Premium.
@@ -298,6 +298,10 @@ type RegistryObservation struct {
 
 	// Whether to enable dedicated data endpoints for this Container Registry? This is only supported on resources with the Premium SKU.
 	DataEndpointEnabled *bool `json:"dataEndpointEnabled,omitempty" tf:"data_endpoint_enabled,omitempty"`
+
+	// A set of data endpoint hostnames associated with the container registry if data endpoints are enabled.
+	// +listType=set
+	DataEndpointHostNames []*string `json:"dataEndpointHostNames,omitempty" tf:"data_endpoint_host_names,omitempty"`
 
 	// An encryption block as documented below.
 	Encryption []EncryptionObservation `json:"encryption,omitempty" tf:"encryption,omitempty"`
@@ -335,7 +339,7 @@ type RegistryObservation struct {
 	// The name of the resource group in which to create the Container Registry. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// The number of days to retain and untagged manifest after which it gets purged. Defaults to 7.
+	// The number of days to retain and untagged manifest after which it gets purged.
 	RetentionPolicyInDays *float64 `json:"retentionPolicyInDays,omitempty" tf:"retention_policy_in_days,omitempty"`
 
 	// The SKU name of the container registry. Possible values are Basic, Standard and Premium.
@@ -403,7 +407,7 @@ type RegistryParameters struct {
 	QuarantinePolicyEnabled *bool `json:"quarantinePolicyEnabled,omitempty" tf:"quarantine_policy_enabled,omitempty"`
 
 	// The name of the resource group in which to create the Container Registry. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -415,7 +419,7 @@ type RegistryParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// The number of days to retain and untagged manifest after which it gets purged. Defaults to 7.
+	// The number of days to retain and untagged manifest after which it gets purged.
 	// +kubebuilder:validation:Optional
 	RetentionPolicyInDays *float64 `json:"retentionPolicyInDays,omitempty" tf:"retention_policy_in_days,omitempty"`
 

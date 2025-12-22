@@ -55,7 +55,7 @@ type AuthenticationParameters struct {
 
 type CustomerManagedKeyInitParameters struct {
 
-	// The versioned ID of the geo backup Key Vault Key.
+	// The versioned/versionless ID of the geo backup Key Vault Key.
 	GeoBackupKeyVaultKeyID *string `json:"geoBackupKeyVaultKeyId,omitempty" tf:"geo_backup_key_vault_key_id,omitempty"`
 
 	// The geo backup user managed identity id for a Customer Managed Key. Must be added to identity.identity_ids.
@@ -70,7 +70,7 @@ type CustomerManagedKeyInitParameters struct {
 
 type CustomerManagedKeyObservation struct {
 
-	// The versioned ID of the geo backup Key Vault Key.
+	// The versioned/versionless ID of the geo backup Key Vault Key.
 	GeoBackupKeyVaultKeyID *string `json:"geoBackupKeyVaultKeyId,omitempty" tf:"geo_backup_key_vault_key_id,omitempty"`
 
 	// The geo backup user managed identity id for a Customer Managed Key. Must be added to identity.identity_ids.
@@ -85,7 +85,7 @@ type CustomerManagedKeyObservation struct {
 
 type CustomerManagedKeyParameters struct {
 
-	// The versioned ID of the geo backup Key Vault Key.
+	// The versioned/versionless ID of the geo backup Key Vault Key.
 	// +kubebuilder:validation:Optional
 	GeoBackupKeyVaultKeyID *string `json:"geoBackupKeyVaultKeyId,omitempty" tf:"geo_backup_key_vault_key_id,omitempty"`
 
@@ -133,7 +133,7 @@ type FlexibleServerInitParameters struct {
 	CustomerManagedKey *CustomerManagedKeyInitParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
 
 	// The ID of the virtual network subnet to create the PostgreSQL Flexible Server. The provided subnet should not have any other resource deployed in it and this subnet will be delegated to the PostgreSQL Flexible Server, if not already delegated. Changing this forces a new PostgreSQL Flexible Server to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DelegatedSubnetID *string `json:"delegatedSubnetId,omitempty" tf:"delegated_subnet_id,omitempty"`
 
@@ -164,7 +164,7 @@ type FlexibleServerInitParameters struct {
 	PointInTimeRestoreTimeInUtc *string `json:"pointInTimeRestoreTimeInUtc,omitempty" tf:"point_in_time_restore_time_in_utc,omitempty"`
 
 	// The ID of the private DNS zone to create the PostgreSQL Flexible Server.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.PrivateDNSZone
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.PrivateDNSZone
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PrivateDNSZoneID *string `json:"privateDnsZoneId,omitempty" tf:"private_dns_zone_id,omitempty"`
 
@@ -186,8 +186,8 @@ type FlexibleServerInitParameters struct {
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// The resource ID of the source PostgreSQL Flexible Server to be restored. Required when create_mode is GeoRestore, PointInTimeRestore or Replica. Changing this forces a new PostgreSQL Flexible Server to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/dbforpostgresql/v1beta1.FlexibleServer
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/dbforpostgresql/v1beta1.FlexibleServer
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	SourceServerID *string `json:"sourceServerId,omitempty" tf:"source_server_id,omitempty"`
 
 	// Reference to a FlexibleServer in dbforpostgresql to populate sourceServerId.
@@ -208,7 +208,7 @@ type FlexibleServerInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The version of PostgreSQL Flexible Server to use. Possible values are 11,12, 13, 14, 15 and 16. Required when create_mode is Default.
+	// The version of PostgreSQL Flexible Server to use. Possible values are 11,12, 13, 14, 15, 16 and 17. Required when create_mode is Default.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
 	// Specifies the Availability Zone in which the PostgreSQL Flexible Server should be located.
@@ -296,7 +296,7 @@ type FlexibleServerObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The version of PostgreSQL Flexible Server to use. Possible values are 11,12, 13, 14, 15 and 16. Required when create_mode is Default.
+	// The version of PostgreSQL Flexible Server to use. Possible values are 11,12, 13, 14, 15, 16 and 17. Required when create_mode is Default.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
 	// Specifies the Availability Zone in which the PostgreSQL Flexible Server should be located.
@@ -348,7 +348,7 @@ type FlexibleServerParameters struct {
 	CustomerManagedKey *CustomerManagedKeyParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
 
 	// The ID of the virtual network subnet to create the PostgreSQL Flexible Server. The provided subnet should not have any other resource deployed in it and this subnet will be delegated to the PostgreSQL Flexible Server, if not already delegated. Changing this forces a new PostgreSQL Flexible Server to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DelegatedSubnetID *string `json:"delegatedSubnetId,omitempty" tf:"delegated_subnet_id,omitempty"`
@@ -386,7 +386,7 @@ type FlexibleServerParameters struct {
 	PointInTimeRestoreTimeInUtc *string `json:"pointInTimeRestoreTimeInUtc,omitempty" tf:"point_in_time_restore_time_in_utc,omitempty"`
 
 	// The ID of the private DNS zone to create the PostgreSQL Flexible Server.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/network/v1beta1.PrivateDNSZone
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/network/v1beta1.PrivateDNSZone
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneID *string `json:"privateDnsZoneId,omitempty" tf:"private_dns_zone_id,omitempty"`
@@ -408,7 +408,7 @@ type FlexibleServerParameters struct {
 	ReplicationRole *string `json:"replicationRole,omitempty" tf:"replication_role,omitempty"`
 
 	// The name of the Resource Group where the PostgreSQL Flexible Server should exist. Changing this forces a new PostgreSQL Flexible Server to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -425,8 +425,8 @@ type FlexibleServerParameters struct {
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// The resource ID of the source PostgreSQL Flexible Server to be restored. Required when create_mode is GeoRestore, PointInTimeRestore or Replica. Changing this forces a new PostgreSQL Flexible Server to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/dbforpostgresql/v1beta1.FlexibleServer
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/dbforpostgresql/v1beta1.FlexibleServer
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceServerID *string `json:"sourceServerId,omitempty" tf:"source_server_id,omitempty"`
 
@@ -451,7 +451,7 @@ type FlexibleServerParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The version of PostgreSQL Flexible Server to use. Possible values are 11,12, 13, 14, 15 and 16. Required when create_mode is Default.
+	// The version of PostgreSQL Flexible Server to use. Possible values are 11,12, 13, 14, 15, 16 and 17. Required when create_mode is Default.
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 

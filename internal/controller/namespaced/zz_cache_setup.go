@@ -9,19 +9,21 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	rediscache "github.com/upbound/provider-azure/internal/controller/namespaced/cache/rediscache"
-	rediscacheaccesspolicy "github.com/upbound/provider-azure/internal/controller/namespaced/cache/rediscacheaccesspolicy"
-	rediscacheaccesspolicyassignment "github.com/upbound/provider-azure/internal/controller/namespaced/cache/rediscacheaccesspolicyassignment"
-	redisenterprisecluster "github.com/upbound/provider-azure/internal/controller/namespaced/cache/redisenterprisecluster"
-	redisenterprisedatabase "github.com/upbound/provider-azure/internal/controller/namespaced/cache/redisenterprisedatabase"
-	redisfirewallrule "github.com/upbound/provider-azure/internal/controller/namespaced/cache/redisfirewallrule"
-	redislinkedserver "github.com/upbound/provider-azure/internal/controller/namespaced/cache/redislinkedserver"
+	managedredis "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cache/managedredis"
+	rediscache "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cache/rediscache"
+	rediscacheaccesspolicy "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cache/rediscacheaccesspolicy"
+	rediscacheaccesspolicyassignment "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cache/rediscacheaccesspolicyassignment"
+	redisenterprisecluster "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cache/redisenterprisecluster"
+	redisenterprisedatabase "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cache/redisenterprisedatabase"
+	redisfirewallrule "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cache/redisfirewallrule"
+	redislinkedserver "github.com/upbound/provider-azure/v2/internal/controller/namespaced/cache/redislinkedserver"
 )
 
 // Setup_cache creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup_cache(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		managedredis.Setup,
 		rediscache.Setup,
 		rediscacheaccesspolicy.Setup,
 		rediscacheaccesspolicyassignment.Setup,
@@ -41,6 +43,7 @@ func Setup_cache(mgr ctrl.Manager, o controller.Options) error {
 // the supplied manager gated.
 func SetupGated_cache(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		managedredis.SetupGated,
 		rediscache.SetupGated,
 		rediscacheaccesspolicy.SetupGated,
 		rediscacheaccesspolicyassignment.SetupGated,

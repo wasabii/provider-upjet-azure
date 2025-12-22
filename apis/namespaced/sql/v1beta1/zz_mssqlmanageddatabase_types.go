@@ -31,6 +31,8 @@ type MSSQLManagedDatabaseInitParameters struct {
 }
 
 type MSSQLManagedDatabaseLongTermRetentionPolicyInitParameters struct {
+
+	// Specifies if the backups are immutable. Defaults to false.
 	ImmutableBackupsEnabled *bool `json:"immutableBackupsEnabled,omitempty" tf:"immutable_backups_enabled,omitempty"`
 
 	// The monthly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 120 months. e.g. P1Y, P1M, P4W or P30D. Defaults to PT0S.
@@ -47,6 +49,8 @@ type MSSQLManagedDatabaseLongTermRetentionPolicyInitParameters struct {
 }
 
 type MSSQLManagedDatabaseLongTermRetentionPolicyObservation struct {
+
+	// Specifies if the backups are immutable. Defaults to false.
 	ImmutableBackupsEnabled *bool `json:"immutableBackupsEnabled,omitempty" tf:"immutable_backups_enabled,omitempty"`
 
 	// The monthly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 120 months. e.g. P1Y, P1M, P4W or P30D. Defaults to PT0S.
@@ -64,6 +68,7 @@ type MSSQLManagedDatabaseLongTermRetentionPolicyObservation struct {
 
 type MSSQLManagedDatabaseLongTermRetentionPolicyParameters struct {
 
+	// Specifies if the backups are immutable. Defaults to false.
 	// +kubebuilder:validation:Optional
 	ImmutableBackupsEnabled *bool `json:"immutableBackupsEnabled,omitempty" tf:"immutable_backups_enabled,omitempty"`
 
@@ -113,8 +118,8 @@ type MSSQLManagedDatabaseParameters struct {
 	LongTermRetentionPolicy *MSSQLManagedDatabaseLongTermRetentionPolicyParameters `json:"longTermRetentionPolicy,omitempty" tf:"long_term_retention_policy,omitempty"`
 
 	// The ID of the Azure SQL Managed Instance on which to create this Managed Database. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/sql/v1beta1.MSSQLManagedInstance
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/sql/v1beta1.MSSQLManagedInstance
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ManagedInstanceID *string `json:"managedInstanceId,omitempty" tf:"managed_instance_id,omitempty"`
 

@@ -17,7 +17,7 @@ import (
 type ApplicationInsightsWebTestInitParameters struct {
 
 	// The ID of the Application Insights component on which the WebTest operates. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/insights/v1beta1.ApplicationInsights
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta1.ApplicationInsights
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ApplicationInsightsID *string `json:"applicationInsightsId,omitempty" tf:"application_insights_id,omitempty"`
 
@@ -54,7 +54,7 @@ type ApplicationInsightsWebTestInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the resource group in which to create the Application Insights WebTest. Changing this forces a new resource
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// Reference to a ResourceGroup in azure to populate resourceGroupName.
@@ -96,6 +96,7 @@ type ApplicationInsightsWebTestObservation struct {
 	// A list of where to physically run the tests from to give global coverage for accessibility of your application.
 	GeoLocations []*string `json:"geoLocations,omitempty" tf:"geo_locations,omitempty"`
 
+	// The ID of the Application Insights Web Test.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The kind of web test that this web test watches. Choices are ping and multistep. Changing this forces a new resource to be created.
@@ -113,6 +114,7 @@ type ApplicationInsightsWebTestObservation struct {
 	// Allow for retries should this WebTest fail.
 	RetryEnabled *bool `json:"retryEnabled,omitempty" tf:"retry_enabled,omitempty"`
 
+	// The ID of the Application Insights Web Test.
 	SyntheticMonitorID *string `json:"syntheticMonitorId,omitempty" tf:"synthetic_monitor_id,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -126,7 +128,7 @@ type ApplicationInsightsWebTestObservation struct {
 type ApplicationInsightsWebTestParameters struct {
 
 	// The ID of the Application Insights component on which the WebTest operates. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/insights/v1beta1.ApplicationInsights
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/insights/v1beta1.ApplicationInsights
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ApplicationInsightsID *string `json:"applicationInsightsId,omitempty" tf:"application_insights_id,omitempty"`
@@ -172,7 +174,7 @@ type ApplicationInsightsWebTestParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the resource group in which to create the Application Insights WebTest. Changing this forces a new resource
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

@@ -97,14 +97,14 @@ type ComputeInstanceInitParameters struct {
 	// Whether local authentication methods is enabled. Defaults to true. Changing this forces a new Machine Learning Compute Instance to be created.
 	LocalAuthEnabled *bool `json:"localAuthEnabled,omitempty" tf:"local_auth_enabled,omitempty"`
 
-	// Whether the compute instance will have a public ip. To set this to false a subnet_resource_id needs to be set. Defaults to true. Changing this forces a new Machine Learning Compute Cluster to be created.
+	// Whether the compute instance will have a public ip. Defaults to true. Changing this forces a new Machine Learning Compute Cluster to be created.
 	NodePublicIPEnabled *bool `json:"nodePublicIpEnabled,omitempty" tf:"node_public_ip_enabled,omitempty"`
 
 	// A ssh block as defined below. Specifies policy and settings for SSH access. Changing this forces a new Machine Learning Compute Instance to be created.
 	SSH *ComputeInstanceSSHInitParameters `json:"ssh,omitempty" tf:"ssh,omitempty"`
 
 	// Virtual network subnet resource ID the compute nodes belong to. Changing this forces a new Machine Learning Compute Instance to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetResourceID *string `json:"subnetResourceId,omitempty" tf:"subnet_resource_id,omitempty"`
 
@@ -147,7 +147,7 @@ type ComputeInstanceObservation struct {
 	// The ID of the Machine Learning Workspace. Changing this forces a new Machine Learning Compute Instance to be created.
 	MachineLearningWorkspaceID *string `json:"machineLearningWorkspaceId,omitempty" tf:"machine_learning_workspace_id,omitempty"`
 
-	// Whether the compute instance will have a public ip. To set this to false a subnet_resource_id needs to be set. Defaults to true. Changing this forces a new Machine Learning Compute Cluster to be created.
+	// Whether the compute instance will have a public ip. Defaults to true. Changing this forces a new Machine Learning Compute Cluster to be created.
 	NodePublicIPEnabled *bool `json:"nodePublicIpEnabled,omitempty" tf:"node_public_ip_enabled,omitempty"`
 
 	// A ssh block as defined below. Specifies policy and settings for SSH access. Changing this forces a new Machine Learning Compute Instance to be created.
@@ -187,7 +187,7 @@ type ComputeInstanceParameters struct {
 	LocalAuthEnabled *bool `json:"localAuthEnabled,omitempty" tf:"local_auth_enabled,omitempty"`
 
 	// The ID of the Machine Learning Workspace. Changing this forces a new Machine Learning Compute Instance to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/machinelearningservices/v1beta2.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/machinelearningservices/v1beta2.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MachineLearningWorkspaceID *string `json:"machineLearningWorkspaceId,omitempty" tf:"machine_learning_workspace_id,omitempty"`
@@ -200,7 +200,7 @@ type ComputeInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	MachineLearningWorkspaceIDSelector *v1.Selector `json:"machineLearningWorkspaceIdSelector,omitempty" tf:"-"`
 
-	// Whether the compute instance will have a public ip. To set this to false a subnet_resource_id needs to be set. Defaults to true. Changing this forces a new Machine Learning Compute Cluster to be created.
+	// Whether the compute instance will have a public ip. Defaults to true. Changing this forces a new Machine Learning Compute Cluster to be created.
 	// +kubebuilder:validation:Optional
 	NodePublicIPEnabled *bool `json:"nodePublicIpEnabled,omitempty" tf:"node_public_ip_enabled,omitempty"`
 
@@ -209,7 +209,7 @@ type ComputeInstanceParameters struct {
 	SSH *ComputeInstanceSSHParameters `json:"ssh,omitempty" tf:"ssh,omitempty"`
 
 	// Virtual network subnet resource ID the compute nodes belong to. Changing this forces a new Machine Learning Compute Instance to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetResourceID *string `json:"subnetResourceId,omitempty" tf:"subnet_resource_id,omitempty"`

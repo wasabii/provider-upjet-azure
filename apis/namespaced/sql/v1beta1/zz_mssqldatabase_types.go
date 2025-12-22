@@ -17,7 +17,7 @@ import (
 type IdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this SQL Database.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
@@ -47,7 +47,7 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this SQL Database.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -140,6 +140,8 @@ type ImportParameters struct {
 }
 
 type LongTermRetentionPolicyInitParameters struct {
+
+	// Specifies if the backups are immutable. Defaults to false.
 	ImmutableBackupsEnabled *bool `json:"immutableBackupsEnabled,omitempty" tf:"immutable_backups_enabled,omitempty"`
 
 	// The monthly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 120 months. e.g. P1Y, P1M, P4W or P30D. Defaults to PT0S.
@@ -156,6 +158,8 @@ type LongTermRetentionPolicyInitParameters struct {
 }
 
 type LongTermRetentionPolicyObservation struct {
+
+	// Specifies if the backups are immutable. Defaults to false.
 	ImmutableBackupsEnabled *bool `json:"immutableBackupsEnabled,omitempty" tf:"immutable_backups_enabled,omitempty"`
 
 	// The monthly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 120 months. e.g. P1Y, P1M, P4W or P30D. Defaults to PT0S.
@@ -173,6 +177,7 @@ type LongTermRetentionPolicyObservation struct {
 
 type LongTermRetentionPolicyParameters struct {
 
+	// Specifies if the backups are immutable. Defaults to false.
 	// +kubebuilder:validation:Optional
 	ImmutableBackupsEnabled *bool `json:"immutableBackupsEnabled,omitempty" tf:"immutable_backups_enabled,omitempty"`
 
@@ -264,7 +269,7 @@ type MSSQLDatabaseInitParameters struct {
 	// Specifies the name of the sample schema to apply when creating this database. Possible value is AdventureWorksLT.
 	SampleName *string `json:"sampleName,omitempty" tf:"sample_name,omitempty"`
 
-	// How do you want your replica to be made? Valid values include Geo and Named. Defaults to Geo. Changing this forces a new resource to be created.
+	// How do you want your replica to be made? Valid values include Geo, Named and Standby. Defaults to Geo. Changing this forces a new resource to be created.
 	SecondaryType *string `json:"secondaryType,omitempty" tf:"secondary_type,omitempty"`
 
 	// A short_term_retention_policy block as defined below.
@@ -290,7 +295,7 @@ type MSSQLDatabaseInitParameters struct {
 	TransparentDataEncryptionKeyAutomaticRotationEnabled *bool `json:"transparentDataEncryptionKeyAutomaticRotationEnabled,omitempty" tf:"transparent_data_encryption_key_automatic_rotation_enabled,omitempty"`
 
 	// The fully versioned Key Vault Key URL (e.g. 'https://<YourVaultName>.vault.azure.net/keys/<YourKeyName>/<YourKeyVersion>) to be used as the Customer Managed Key(CMK/BYOK) for the Transparent Data Encryption(TDE) layer.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/keyvault/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TransparentDataEncryptionKeyVaultKeyID *string `json:"transparentDataEncryptionKeyVaultKeyId,omitempty" tf:"transparent_data_encryption_key_vault_key_id,omitempty"`
 
@@ -380,7 +385,7 @@ type MSSQLDatabaseObservation struct {
 	// Specifies the name of the sample schema to apply when creating this database. Possible value is AdventureWorksLT.
 	SampleName *string `json:"sampleName,omitempty" tf:"sample_name,omitempty"`
 
-	// How do you want your replica to be made? Valid values include Geo and Named. Defaults to Geo. Changing this forces a new resource to be created.
+	// How do you want your replica to be made? Valid values include Geo, Named and Standby. Defaults to Geo. Changing this forces a new resource to be created.
 	SecondaryType *string `json:"secondaryType,omitempty" tf:"secondary_type,omitempty"`
 
 	// The id of the MS SQL Server on which to create the database. Changing this forces a new resource to be created.
@@ -509,13 +514,13 @@ type MSSQLDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	SampleName *string `json:"sampleName,omitempty" tf:"sample_name,omitempty"`
 
-	// How do you want your replica to be made? Valid values include Geo and Named. Defaults to Geo. Changing this forces a new resource to be created.
+	// How do you want your replica to be made? Valid values include Geo, Named and Standby. Defaults to Geo. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	SecondaryType *string `json:"secondaryType,omitempty" tf:"secondary_type,omitempty"`
 
 	// The id of the MS SQL Server on which to create the database. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/sql/v1beta1.MSSQLServer
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/namespaced/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/sql/v1beta1.MSSQLServer
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
@@ -557,7 +562,7 @@ type MSSQLDatabaseParameters struct {
 	TransparentDataEncryptionKeyAutomaticRotationEnabled *bool `json:"transparentDataEncryptionKeyAutomaticRotationEnabled,omitempty" tf:"transparent_data_encryption_key_automatic_rotation_enabled,omitempty"`
 
 	// The fully versioned Key Vault Key URL (e.g. 'https://<YourVaultName>.vault.azure.net/keys/<YourKeyName>/<YourKeyVersion>) to be used as the Customer Managed Key(CMK/BYOK) for the Transparent Data Encryption(TDE) layer.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/keyvault/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/keyvault/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TransparentDataEncryptionKeyVaultKeyID *string `json:"transparentDataEncryptionKeyVaultKeyId,omitempty" tf:"transparent_data_encryption_key_vault_key_id,omitempty"`

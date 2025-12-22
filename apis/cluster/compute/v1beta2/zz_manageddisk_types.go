@@ -150,7 +150,7 @@ type ManagedDiskInitParameters struct {
 	// The maximum number of VMs that can attach to the disk at the same time. Value greater than one indicates a disk that can be mounted on multiple VMs at the same time.
 	MaxShares *float64 `json:"maxShares,omitempty" tf:"max_shares,omitempty"`
 
-	// Policy for accessing the disk via network. Allowed values are AllowAll, AllowPrivate, and DenyAll.
+	// Policy for accessing the disk via network. Allowed values are AllowAll, AllowPrivate, and DenyAll. Defaults to AllowAll.
 	NetworkAccessPolicy *string `json:"networkAccessPolicy,omitempty" tf:"network_access_policy,omitempty"`
 
 	// Specifies if On-Demand Bursting is enabled for the Managed Disk.
@@ -175,7 +175,7 @@ type ManagedDiskInitParameters struct {
 	SecurityType *string `json:"securityType,omitempty" tf:"security_type,omitempty"`
 
 	// The ID of an existing Managed Disk or Snapshot to copy when create_option is Copy or the recovery point to restore when create_option is Restore. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/compute/v1beta2.ManagedDisk
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/compute/v1beta2.ManagedDisk
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourceResourceID *string `json:"sourceResourceId,omitempty" tf:"source_resource_id,omitempty"`
 
@@ -266,7 +266,7 @@ type ManagedDiskObservation struct {
 	// The maximum number of VMs that can attach to the disk at the same time. Value greater than one indicates a disk that can be mounted on multiple VMs at the same time.
 	MaxShares *float64 `json:"maxShares,omitempty" tf:"max_shares,omitempty"`
 
-	// Policy for accessing the disk via network. Allowed values are AllowAll, AllowPrivate, and DenyAll.
+	// Policy for accessing the disk via network. Allowed values are AllowAll, AllowPrivate, and DenyAll. Defaults to AllowAll.
 	NetworkAccessPolicy *string `json:"networkAccessPolicy,omitempty" tf:"network_access_policy,omitempty"`
 
 	// Specifies if On-Demand Bursting is enabled for the Managed Disk.
@@ -388,7 +388,7 @@ type ManagedDiskParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxShares *float64 `json:"maxShares,omitempty" tf:"max_shares,omitempty"`
 
-	// Policy for accessing the disk via network. Allowed values are AllowAll, AllowPrivate, and DenyAll.
+	// Policy for accessing the disk via network. Allowed values are AllowAll, AllowPrivate, and DenyAll. Defaults to AllowAll.
 	// +kubebuilder:validation:Optional
 	NetworkAccessPolicy *string `json:"networkAccessPolicy,omitempty" tf:"network_access_policy,omitempty"`
 
@@ -413,7 +413,7 @@ type ManagedDiskParameters struct {
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the Resource Group where the Managed Disk should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -434,7 +434,7 @@ type ManagedDiskParameters struct {
 	SecurityType *string `json:"securityType,omitempty" tf:"security_type,omitempty"`
 
 	// The ID of an existing Managed Disk or Snapshot to copy when create_option is Copy or the recovery point to restore when create_option is Restore. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/compute/v1beta2.ManagedDisk
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/compute/v1beta2.ManagedDisk
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceResourceID *string `json:"sourceResourceId,omitempty" tf:"source_resource_id,omitempty"`

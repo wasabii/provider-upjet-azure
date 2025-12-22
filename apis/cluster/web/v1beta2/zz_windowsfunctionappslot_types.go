@@ -1837,7 +1837,7 @@ type WindowsFunctionAppSlotInitParameters struct {
 
 	// The backend storage account name which will be used by this Function App Slot.
 	// The backend storage account name which will be used by this Function App Slot.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
 	// Reference to a Account in storage to populate storageAccountName.
@@ -1864,8 +1864,8 @@ type WindowsFunctionAppSlotInitParameters struct {
 	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
 
 	// The subnet id which will be used by this Function App Slot for regional virtual network integration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
@@ -2090,7 +2090,7 @@ type WindowsFunctionAppSlotParameters struct {
 
 	// The name of the Windows Function App this Slot is a member of. Changing this forces a new resource to be created.
 	// The ID of the Windows Function App this Slot is a member of.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/web/v1beta2.WindowsFunctionApp
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/web/v1beta2.WindowsFunctionApp
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	FunctionAppID *string `json:"functionAppId,omitempty" tf:"function_app_id,omitempty"`
@@ -2145,7 +2145,7 @@ type WindowsFunctionAppSlotParameters struct {
 
 	// The backend storage account name which will be used by this Function App Slot.
 	// The backend storage account name which will be used by this Function App Slot.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
@@ -2177,8 +2177,8 @@ type WindowsFunctionAppSlotParameters struct {
 	VirtualNetworkBackupRestoreEnabled *bool `json:"virtualNetworkBackupRestoreEnabled,omitempty" tf:"virtual_network_backup_restore_enabled,omitempty"`
 
 	// The subnet id which will be used by this Function App Slot for regional virtual network integration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
@@ -2237,11 +2237,11 @@ type WindowsFunctionAppSlotSiteConfigAppServiceLogsParameters struct {
 
 type WindowsFunctionAppSlotSiteConfigApplicationStackInitParameters struct {
 
-	// The version of .Net. Possible values are v3.0, v4.0, v6.0, v7.0, v8.0 and v9.0. Defaults to v4.0.
-	// The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0`, `v7.0`, `v8.0` and `v9.0`
+	// The version of .Net. Possible values are v3.0, v4.0, v6.0, v7.0, v8.0, v9.0 and v10.0. Defaults to v4.0.
+	// The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0`, `v7.0`, `v8.0`, `v9.0` and `v10.0`
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
-	// The version of Java to use. Possible values are 1.8, 11 and 17 (In-Preview).
+	// The version of Java to use. Possible values are 1.8, 11, 17 and 21.
 	// The version of Java to use. Possible values are `1.8`, `11`, `17`, and `21`
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
@@ -2264,11 +2264,11 @@ type WindowsFunctionAppSlotSiteConfigApplicationStackInitParameters struct {
 
 type WindowsFunctionAppSlotSiteConfigApplicationStackObservation struct {
 
-	// The version of .Net. Possible values are v3.0, v4.0, v6.0, v7.0, v8.0 and v9.0. Defaults to v4.0.
-	// The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0`, `v7.0`, `v8.0` and `v9.0`
+	// The version of .Net. Possible values are v3.0, v4.0, v6.0, v7.0, v8.0, v9.0 and v10.0. Defaults to v4.0.
+	// The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0`, `v7.0`, `v8.0`, `v9.0` and `v10.0`
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
-	// The version of Java to use. Possible values are 1.8, 11 and 17 (In-Preview).
+	// The version of Java to use. Possible values are 1.8, 11, 17 and 21.
 	// The version of Java to use. Possible values are `1.8`, `11`, `17`, and `21`
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
@@ -2291,12 +2291,12 @@ type WindowsFunctionAppSlotSiteConfigApplicationStackObservation struct {
 
 type WindowsFunctionAppSlotSiteConfigApplicationStackParameters struct {
 
-	// The version of .Net. Possible values are v3.0, v4.0, v6.0, v7.0, v8.0 and v9.0. Defaults to v4.0.
-	// The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0`, `v7.0`, `v8.0` and `v9.0`
+	// The version of .Net. Possible values are v3.0, v4.0, v6.0, v7.0, v8.0, v9.0 and v10.0. Defaults to v4.0.
+	// The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0`, `v7.0`, `v8.0`, `v9.0` and `v10.0`
 	// +kubebuilder:validation:Optional
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
-	// The version of Java to use. Possible values are 1.8, 11 and 17 (In-Preview).
+	// The version of Java to use. Possible values are 1.8, 11, 17 and 21.
 	// The version of Java to use. Possible values are `1.8`, `11`, `17`, and `21`
 	// +kubebuilder:validation:Optional
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
@@ -2440,8 +2440,8 @@ type WindowsFunctionAppSlotSiteConfigIPRestrictionInitParameters struct {
 
 	// The subnet id which will be used by this Function App Slot for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
@@ -2525,8 +2525,8 @@ type WindowsFunctionAppSlotSiteConfigIPRestrictionParameters struct {
 
 	// The subnet id which will be used by this Function App Slot for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
@@ -3050,8 +3050,8 @@ type WindowsFunctionAppSlotSiteConfigScmIPRestrictionInitParameters struct {
 
 	// The subnet id which will be used by this Function App Slot for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
@@ -3135,8 +3135,8 @@ type WindowsFunctionAppSlotSiteConfigScmIPRestrictionParameters struct {
 
 	// The subnet id which will be used by this Function App Slot for regional virtual network integration.
 	// The Virtual Network Subnet ID used for this IP Restriction.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/network/v1beta2.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/cluster/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/cluster/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 

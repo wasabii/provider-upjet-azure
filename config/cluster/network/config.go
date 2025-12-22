@@ -12,7 +12,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/config"
 
-	"github.com/upbound/provider-azure/apis/cluster/rconfig"
+	"github.com/upbound/provider-azure/v2/apis/cluster/rconfig"
 )
 
 // Configure configures virtual group
@@ -644,6 +644,13 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_virtual_hub_connection", func(r *config.Resource) {
 		r.References["routing.associated_route_table_id"] = config.Reference{
 			TerraformName: "azurerm_virtual_hub_route_table",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_virtual_hub_routing_intent", func(r *config.Resource) {
+		r.References["virtual_hub_id"] = config.Reference{
+			TerraformName: "azurerm_virtual_hub",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})

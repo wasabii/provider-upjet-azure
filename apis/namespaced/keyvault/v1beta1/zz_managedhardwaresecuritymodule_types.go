@@ -26,7 +26,7 @@ type ManagedHardwareSecurityModuleInitParameters struct {
 	// A network_acls block as defined below.
 	NetworkAcls *ManagedHardwareSecurityModuleNetworkAclsInitParameters `json:"networkAcls,omitempty" tf:"network_acls,omitempty"`
 
-	// Whether traffic from public networks is permitted. Defaults to true. Changing this forces a new resource to be created.
+	// Whether traffic from public networks is permitted. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// Is Purge Protection enabled for this Key Vault Managed Hardware Security Module? Changing this forces a new resource to be created.
@@ -99,7 +99,7 @@ type ManagedHardwareSecurityModuleObservation struct {
 	// A network_acls block as defined below.
 	NetworkAcls *ManagedHardwareSecurityModuleNetworkAclsObservation `json:"networkAcls,omitempty" tf:"network_acls,omitempty"`
 
-	// Whether traffic from public networks is permitted. Defaults to true. Changing this forces a new resource to be created.
+	// Whether traffic from public networks is permitted. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// Is Purge Protection enabled for this Key Vault Managed Hardware Security Module? Changing this forces a new resource to be created.
@@ -143,7 +143,7 @@ type ManagedHardwareSecurityModuleParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkAcls *ManagedHardwareSecurityModuleNetworkAclsParameters `json:"networkAcls,omitempty" tf:"network_acls,omitempty"`
 
-	// Whether traffic from public networks is permitted. Defaults to true. Changing this forces a new resource to be created.
+	// Whether traffic from public networks is permitted. Defaults to true.
 	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
@@ -152,7 +152,7 @@ type ManagedHardwareSecurityModuleParameters struct {
 	PurgeProtectionEnabled *bool `json:"purgeProtectionEnabled,omitempty" tf:"purge_protection_enabled,omitempty"`
 
 	// The name of the resource group in which to create the Key Vault Managed Hardware Security Module. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/namespaced/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

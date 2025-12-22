@@ -52,6 +52,12 @@ type ProviderConfigSpec struct {
 
 	// ServiceAccount within the same namespace that should be used to derive the OIDC token.
 	ServiceAccountRef *ProviderServiceAccountReference `json:"serviceAccountRef,omitempty"`
+
+	// StorageUseAzureAD configures Provider to use AzureAD
+	// to connect to the Storage Blob & Queue APIs,
+	// rather than the SharedKey from the Storage Account.
+	// +kubebuilder:validation:Optional
+	StorageUseAzureAD *bool `json:"storageUseAzureAD,omitempty"`
 }
 
 // ProviderCredentials required to authenticate.

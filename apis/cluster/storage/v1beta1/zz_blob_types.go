@@ -27,7 +27,7 @@ type BlobInitParameters struct {
 	// The content type of the storage blob. Cannot be defined if source_uri is defined. Defaults to application/octet-stream.
 	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
-	// The encryption scope to use for this blob.
+	// The encryption scope to use for this blob. Changing this forces a new resource to be created.
 	EncryptionScope *string `json:"encryptionScope,omitempty" tf:"encryption_scope,omitempty"`
 
 	// A map of custom blob metadata.
@@ -67,7 +67,7 @@ type BlobObservation struct {
 	// The content type of the storage blob. Cannot be defined if source_uri is defined. Defaults to application/octet-stream.
 	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
-	// The encryption scope to use for this blob.
+	// The encryption scope to use for this blob. Changing this forces a new resource to be created.
 	EncryptionScope *string `json:"encryptionScope,omitempty" tf:"encryption_scope,omitempty"`
 
 	// The ID of the Storage Blob.
@@ -123,7 +123,7 @@ type BlobParameters struct {
 	// +kubebuilder:validation:Optional
 	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
-	// The encryption scope to use for this blob.
+	// The encryption scope to use for this blob. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	EncryptionScope *string `json:"encryptionScope,omitempty" tf:"encryption_scope,omitempty"`
 
@@ -153,7 +153,7 @@ type BlobParameters struct {
 	SourceURI *string `json:"sourceUri,omitempty" tf:"source_uri,omitempty"`
 
 	// Specifies the storage account in which to create the storage container. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta2.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta2.Account
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
@@ -166,7 +166,7 @@ type BlobParameters struct {
 	StorageAccountNameSelector *v1.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
 
 	// The name of the storage container in which this blob should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cluster/storage/v1beta1.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/cluster/storage/v1beta1.Container
 	// +kubebuilder:validation:Optional
 	StorageContainerName *string `json:"storageContainerName,omitempty" tf:"storage_container_name,omitempty"`
 
