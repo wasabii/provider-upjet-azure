@@ -17,10 +17,23 @@ import (
 type SubscriptionInitParameters struct {
 
 	// The ID of the API which should be assigned to this Subscription. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.API
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
+
+	// Reference to a API in apimanagement to populate apiId.
+	// +kubebuilder:validation:Optional
+	APIIDRef *v1.NamespacedReference `json:"apiIdRef,omitempty" tf:"-"`
+
+	// Selector for a API in apimanagement to populate apiId.
+	// +kubebuilder:validation:Optional
+	APIIDSelector *v1.NamespacedSelector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// Determines whether tracing can be enabled. Defaults to true.
 	AllowTracing *bool `json:"allowTracing,omitempty" tf:"allow_tracing,omitempty"`
+
+	// The display name of this Subscription.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// The primary subscription key to use for the subscription.
 	PrimaryKeySecretRef *v1.LocalSecretKeySelector `json:"primaryKeySecretRef,omitempty" tf:"-"`
@@ -72,6 +85,9 @@ type SubscriptionObservation struct {
 	// Determines whether tracing can be enabled. Defaults to true.
 	AllowTracing *bool `json:"allowTracing,omitempty" tf:"allow_tracing,omitempty"`
 
+	// The display name of this Subscription.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
 	// The ID of the API Management Subscription.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -94,8 +110,18 @@ type SubscriptionObservation struct {
 type SubscriptionParameters struct {
 
 	// The ID of the API which should be assigned to this Subscription. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.API
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/v2/apis/namespaced/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
+
+	// Reference to a API in apimanagement to populate apiId.
+	// +kubebuilder:validation:Optional
+	APIIDRef *v1.NamespacedReference `json:"apiIdRef,omitempty" tf:"-"`
+
+	// Selector for a API in apimanagement to populate apiId.
+	// +kubebuilder:validation:Optional
+	APIIDSelector *v1.NamespacedSelector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// The name of the API Management Service where this Subscription should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/v2/apis/namespaced/apimanagement/v1beta1.Management
@@ -113,6 +139,10 @@ type SubscriptionParameters struct {
 	// Determines whether tracing can be enabled. Defaults to true.
 	// +kubebuilder:validation:Optional
 	AllowTracing *bool `json:"allowTracing,omitempty" tf:"allow_tracing,omitempty"`
+
+	// The display name of this Subscription.
+	// +kubebuilder:validation:Optional
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// The primary subscription key to use for the subscription.
 	// +kubebuilder:validation:Optional
@@ -208,8 +238,9 @@ type SubscriptionStatus struct {
 type Subscription struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SubscriptionSpec   `json:"spec"`
-	Status            SubscriptionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.displayName) || (has(self.initProvider) && has(self.initProvider.displayName))",message="spec.forProvider.displayName is a required parameter"
+	Spec   SubscriptionSpec   `json:"spec"`
+	Status SubscriptionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

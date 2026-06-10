@@ -15,6 +15,9 @@ import (
 
 type BasicAuthInitParameters struct {
 
+	// Specifies the password of git repository basic auth.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
 	// Specifies the username of git repository basic auth.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
@@ -139,6 +142,12 @@ type SSHAuthInitParameters struct {
 
 	// Specifies the SSH Key algorithm of git repository basic auth.
 	HostKeyAlgorithm *string `json:"hostKeyAlgorithm,omitempty" tf:"host_key_algorithm,omitempty"`
+
+	// Specifies the Public SSH Key of git repository basic auth.
+	HostKeySecretRef *v1.SecretKeySelector `json:"hostKeySecretRef,omitempty" tf:"-"`
+
+	// Specifies the Private SSH Key of git repository basic auth.
+	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
 }
 
 type SSHAuthObservation struct {
@@ -276,9 +285,10 @@ type SpringCloudCustomizedAcceleratorStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
+// +kubebuilder:deprecatedversion:warning="This API version is deprecated. Deprecated since v2.6.0."
 
 // SpringCloudCustomizedAccelerator is the Schema for the SpringCloudCustomizedAccelerators API. Manages a Spring Cloud Customized Accelerator.
+// Deprecated: This API version (v1beta1) has been deprecated in release v2.6.0.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -23,10 +23,12 @@ import (
 	"github.com/upbound/provider-azure/v2/config/namespaced/containerservice"
 	"github.com/upbound/provider-azure/v2/config/namespaced/cosmosdb"
 	"github.com/upbound/provider-azure/v2/config/namespaced/costmanagement"
+	"github.com/upbound/provider-azure/v2/config/namespaced/dashboard"
 	"github.com/upbound/provider-azure/v2/config/namespaced/datafactory"
 	"github.com/upbound/provider-azure/v2/config/namespaced/dataprotection"
 	"github.com/upbound/provider-azure/v2/config/namespaced/datashare"
 	"github.com/upbound/provider-azure/v2/config/namespaced/dbformysql"
+	"github.com/upbound/provider-azure/v2/config/namespaced/desktopvirtualization"
 	"github.com/upbound/provider-azure/v2/config/namespaced/devices"
 	"github.com/upbound/provider-azure/v2/config/namespaced/eventgrid"
 	"github.com/upbound/provider-azure/v2/config/namespaced/eventhub"
@@ -106,4 +108,6 @@ func init() {
 	ProviderConfiguration.AddConfig(cognitiveservices.Configure)
 	ProviderConfiguration.AddConfig(machinelearningservices.Configure)
 	ProviderConfiguration.AddConfig(eventgrid.Configure)
+	ProviderConfiguration.AddConfig(dashboard.Configure)
+	ProviderConfiguration.AddConfig(desktopvirtualization.Configure)
 }

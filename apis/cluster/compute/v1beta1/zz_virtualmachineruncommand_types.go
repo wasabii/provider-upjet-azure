@@ -14,6 +14,12 @@ import (
 )
 
 type ErrorBlobManagedIdentityInitParameters struct {
+
+	// The client ID of the managed identity.
+	ClientIDSecretRef *v1.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
+
+	// The object ID of the managed identity.
+	ObjectIDSecretRef *v1.SecretKeySelector `json:"objectIdSecretRef,omitempty" tf:"-"`
 }
 
 type ErrorBlobManagedIdentityObservation struct {
@@ -53,6 +59,12 @@ type InstanceViewParameters struct {
 }
 
 type OutputBlobManagedIdentityInitParameters struct {
+
+	// The client ID of the managed identity.
+	ClientIDSecretRef *v1.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
+
+	// The object ID of the managed identity.
+	ObjectIDSecretRef *v1.SecretKeySelector `json:"objectIdSecretRef,omitempty" tf:"-"`
 }
 
 type OutputBlobManagedIdentityObservation struct {
@@ -99,6 +111,12 @@ type ParameterParameters struct {
 }
 
 type ProtectedParameterInitParameters struct {
+
+	// The run parameter name.
+	NameSecretRef v1.SecretKeySelector `json:"nameSecretRef" tf:"-"`
+
+	// The run parameter value.
+	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
 type ProtectedParameterObservation struct {
@@ -116,6 +134,12 @@ type ProtectedParameterParameters struct {
 }
 
 type ScriptURIManagedIdentityInitParameters struct {
+
+	// The client ID of the managed identity.
+	ClientIDSecretRef *v1.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
+
+	// The object ID of the managed identity.
+	ObjectIDSecretRef *v1.SecretKeySelector `json:"objectIdSecretRef,omitempty" tf:"-"`
 }
 
 type ScriptURIManagedIdentityObservation struct {
@@ -174,6 +198,9 @@ type VirtualMachineRunCommandInitParameters struct {
 
 	// A list of protected_parameter blocks as defined below. The protected parameters used by the script.
 	ProtectedParameter []ProtectedParameterInitParameters `json:"protectedParameter,omitempty" tf:"protected_parameter,omitempty"`
+
+	// Specifies the user account password on the VM when executing the Virtual Machine Run Command.
+	RunAsPasswordSecretRef *v1.SecretKeySelector `json:"runAsPasswordSecretRef,omitempty" tf:"-"`
 
 	// Specifies the user account on the VM when executing the Virtual Machine Run Command.
 	RunAsUser *string `json:"runAsUser,omitempty" tf:"run_as_user,omitempty"`
@@ -393,9 +420,10 @@ type VirtualMachineRunCommandStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
+// +kubebuilder:deprecatedversion:warning="This API version is deprecated. Deprecated since v2.6.0."
 
 // VirtualMachineRunCommand is the Schema for the VirtualMachineRunCommands API. Manages a Virtual Machine Run Command.
+// Deprecated: This API version (v1beta1) has been deprecated in release v2.6.0.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

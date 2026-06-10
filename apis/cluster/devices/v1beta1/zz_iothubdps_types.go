@@ -219,6 +219,9 @@ type LinkedHubInitParameters struct {
 	// Determines whether to apply allocation policies to the IoT Hub. Defaults to true.
 	ApplyAllocationPolicy *bool `json:"applyAllocationPolicy,omitempty" tf:"apply_allocation_policy,omitempty"`
 
+	// The connection string to connect to the IoT Hub.
+	ConnectionStringSecretRef v1.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
+
 	// The location of the IoT hub.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 }
@@ -282,9 +285,10 @@ type IOTHubDPSStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
+// +kubebuilder:deprecatedversion:warning="This API version is deprecated. Deprecated since v2.6.0."
 
 // IOTHubDPS is the Schema for the IOTHubDPSs API. Manages an IoT Device Provisioning Service.
+// Deprecated: This API version (v1beta1) has been deprecated in release v2.6.0.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

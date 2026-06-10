@@ -72,6 +72,9 @@ type LinkedServiceAzureBlobStorageInitParameters struct {
 	// The connection string sent insecurely. Conflicts with connection_string, sas_uri and service_endpoint.
 	ConnectionStringInsecure *string `json:"connectionStringInsecure,omitempty" tf:"connection_string_insecure,omitempty"`
 
+	// The connection string. Conflicts with connection_string_insecure, sas_uri and service_endpoint.
+	ConnectionStringSecretRef *v1.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
+
 	// The description for the Data Factory Linked Service.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -90,6 +93,12 @@ type LinkedServiceAzureBlobStorageInitParameters struct {
 
 	// The service principal key in which to authenticate against the AAzure Blob Storage account.
 	ServicePrincipalKey *string `json:"servicePrincipalKey,omitempty" tf:"service_principal_key,omitempty"`
+
+	// The SAS URI. Conflicts with connection_string_insecure, connection_string and service_endpoint.
+	SASURISecretRef *v1.SecretKeySelector `json:"sasuriSecretRef,omitempty" tf:"-"`
+
+	// The Service Endpoint. Conflicts with connection_string, connection_string_insecure and sas_uri.
+	ServiceEndpointSecretRef *v1.SecretKeySelector `json:"serviceEndpointSecretRef,omitempty" tf:"-"`
 
 	// A service_principal_linked_key_vault_key block as defined below. Use this argument to store Service Principal key in an existing Key Vault. It needs an existing Key Vault Data Factory Linked Service.
 	ServicePrincipalLinkedKeyVaultKey []ServicePrincipalLinkedKeyVaultKeyInitParameters `json:"servicePrincipalLinkedKeyVaultKey,omitempty" tf:"service_principal_linked_key_vault_key,omitempty"`
@@ -309,9 +318,10 @@ type LinkedServiceAzureBlobStorageStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
+// +kubebuilder:deprecatedversion:warning="This API version is deprecated. Deprecated since v2.6.0."
 
 // LinkedServiceAzureBlobStorage is the Schema for the LinkedServiceAzureBlobStorages API. Manages a Linked Service (connection) between an Azure Blob Storage Account and Azure Data Factory.
+// Deprecated: This API version (v1beta1) has been deprecated in release v2.6.0.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

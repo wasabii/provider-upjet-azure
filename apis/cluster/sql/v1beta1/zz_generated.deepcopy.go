@@ -481,6 +481,7 @@ func (in *ImportInitParameters) DeepCopyInto(out *ImportInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	in.AdministratorLoginPasswordSecretRef.DeepCopyInto(&out.AdministratorLoginPasswordSecretRef)
 	if in.AuthenticationType != nil {
 		in, out := &in.AuthenticationType, &out.AuthenticationType
 		*out = new(string)
@@ -491,6 +492,7 @@ func (in *ImportInitParameters) DeepCopyInto(out *ImportInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	in.StorageKeySecretRef.DeepCopyInto(&out.StorageKeySecretRef)
 	if in.StorageKeyType != nil {
 		in, out := &in.StorageKeyType, &out.StorageKeyType
 		*out = new(string)
@@ -1039,6 +1041,16 @@ func (in *MSSQLDatabaseInitParameters) DeepCopyInto(out *MSSQLDatabaseInitParame
 		*out = new(string)
 		**out = **in
 	}
+	if in.ElasticPoolIDRef != nil {
+		in, out := &in.ElasticPoolIDRef, &out.ElasticPoolIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ElasticPoolIDSelector != nil {
+		in, out := &in.ElasticPoolIDSelector, &out.ElasticPoolIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.EnclaveType != nil {
 		in, out := &in.EnclaveType, &out.EnclaveType
 		*out = new(string)
@@ -1492,6 +1504,16 @@ func (in *MSSQLDatabaseParameters) DeepCopyInto(out *MSSQLDatabaseParameters) {
 		in, out := &in.ElasticPoolID, &out.ElasticPoolID
 		*out = new(string)
 		**out = **in
+	}
+	if in.ElasticPoolIDRef != nil {
+		in, out := &in.ElasticPoolIDRef, &out.ElasticPoolIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ElasticPoolIDSelector != nil {
+		in, out := &in.ElasticPoolIDSelector, &out.ElasticPoolIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.EnclaveType != nil {
 		in, out := &in.EnclaveType, &out.EnclaveType
@@ -5432,9 +5454,19 @@ func (in *MSSQLManagedInstanceVulnerabilityAssessmentInitParameters) DeepCopyInt
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.StorageAccountAccessKeySecretRef != nil {
+		in, out := &in.StorageAccountAccessKeySecretRef, &out.StorageAccountAccessKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.StorageContainerPath != nil {
 		in, out := &in.StorageContainerPath, &out.StorageContainerPath
 		*out = new(string)
+		**out = **in
+	}
+	if in.StorageContainerSASKeySecretRef != nil {
+		in, out := &in.StorageContainerSASKeySecretRef, &out.StorageContainerSASKeySecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 }
@@ -7430,9 +7462,19 @@ func (in *MSSQLServerVulnerabilityAssessmentInitParameters) DeepCopyInto(out *MS
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.StorageAccountAccessKeySecretRef != nil {
+		in, out := &in.StorageAccountAccessKeySecretRef, &out.StorageAccountAccessKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.StorageContainerPath != nil {
 		in, out := &in.StorageContainerPath, &out.StorageContainerPath
 		*out = new(string)
+		**out = **in
+	}
+	if in.StorageContainerSASKeySecretRef != nil {
+		in, out := &in.StorageContainerSASKeySecretRef, &out.StorageContainerSASKeySecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 }

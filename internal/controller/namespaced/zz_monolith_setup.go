@@ -57,6 +57,7 @@ import (
 	tag "github.com/upbound/provider-azure/v2/internal/controller/namespaced/apimanagement/tag"
 	user "github.com/upbound/provider-azure/v2/internal/controller/namespaced/apimanagement/user"
 	configuration "github.com/upbound/provider-azure/v2/internal/controller/namespaced/appconfiguration/configuration"
+	key "github.com/upbound/provider-azure/v2/internal/controller/namespaced/appconfiguration/key"
 	springcloudaccelerator "github.com/upbound/provider-azure/v2/internal/controller/namespaced/appplatform/springcloudaccelerator"
 	springcloudactivedeployment "github.com/upbound/provider-azure/v2/internal/controller/namespaced/appplatform/springcloudactivedeployment"
 	springcloudapiportal "github.com/upbound/provider-azure/v2/internal/controller/namespaced/appplatform/springcloudapiportal"
@@ -93,6 +94,7 @@ import (
 	resourcepolicyexemption "github.com/upbound/provider-azure/v2/internal/controller/namespaced/authorization/resourcepolicyexemption"
 	roleassignment "github.com/upbound/provider-azure/v2/internal/controller/namespaced/authorization/roleassignment"
 	roledefinition "github.com/upbound/provider-azure/v2/internal/controller/namespaced/authorization/roledefinition"
+	rolemanagementpolicy "github.com/upbound/provider-azure/v2/internal/controller/namespaced/authorization/rolemanagementpolicy"
 	subscriptionpolicyassignment "github.com/upbound/provider-azure/v2/internal/controller/namespaced/authorization/subscriptionpolicyassignment"
 	subscriptionpolicyexemption "github.com/upbound/provider-azure/v2/internal/controller/namespaced/authorization/subscriptionpolicyexemption"
 	trustedaccessrolebinding "github.com/upbound/provider-azure/v2/internal/controller/namespaced/authorization/trustedaccessrolebinding"
@@ -191,6 +193,7 @@ import (
 	environmentdaprcomponent "github.com/upbound/provider-azure/v2/internal/controller/namespaced/containerapp/environmentdaprcomponent"
 	environmentstorage "github.com/upbound/provider-azure/v2/internal/controller/namespaced/containerapp/environmentstorage"
 	agentpool "github.com/upbound/provider-azure/v2/internal/controller/namespaced/containerregistry/agentpool"
+	cacherule "github.com/upbound/provider-azure/v2/internal/controller/namespaced/containerregistry/cacherule"
 	containerconnectedregistry "github.com/upbound/provider-azure/v2/internal/controller/namespaced/containerregistry/containerconnectedregistry"
 	credentialset "github.com/upbound/provider-azure/v2/internal/controller/namespaced/containerregistry/credentialset"
 	registry "github.com/upbound/provider-azure/v2/internal/controller/namespaced/containerregistry/registry"
@@ -227,6 +230,8 @@ import (
 	resourcegroupcostmanagementexport "github.com/upbound/provider-azure/v2/internal/controller/namespaced/costmanagement/resourcegroupcostmanagementexport"
 	subscriptioncostmanagementexport "github.com/upbound/provider-azure/v2/internal/controller/namespaced/costmanagement/subscriptioncostmanagementexport"
 	customprovider "github.com/upbound/provider-azure/v2/internal/controller/namespaced/customproviders/customprovider"
+	grafana "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dashboard/grafana"
+	grafanamanagedprivateendpoint "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dashboard/grafanamanagedprivateendpoint"
 	device "github.com/upbound/provider-azure/v2/internal/controller/namespaced/databoxedge/device"
 	accessconnector "github.com/upbound/provider-azure/v2/internal/controller/namespaced/databricks/accessconnector"
 	workspace "github.com/upbound/provider-azure/v2/internal/controller/namespaced/databricks/workspace"
@@ -297,6 +302,7 @@ import (
 	datashare "github.com/upbound/provider-azure/v2/internal/controller/namespaced/datashare/datashare"
 	flexibledatabase "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbformysql/flexibledatabase"
 	flexibleserver "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbformysql/flexibleserver"
+	flexibleserveractivedirectoryadministrator "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbformysql/flexibleserveractivedirectoryadministrator"
 	flexibleserverconfiguration "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbformysql/flexibleserverconfiguration"
 	flexibleserverfirewallrule "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbformysql/flexibleserverfirewallrule"
 	activedirectoryadministrator "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/activedirectoryadministrator"
@@ -304,7 +310,8 @@ import (
 	database "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/database"
 	firewallrule "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/firewallrule"
 	flexibleserverdbforpostgresql "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/flexibleserver"
-	flexibleserveractivedirectoryadministrator "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/flexibleserveractivedirectoryadministrator"
+	flexibleserveractivedirectoryadministratordbforpostgresql "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/flexibleserveractivedirectoryadministrator"
+	flexibleserverbackup "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/flexibleserverbackup"
 	flexibleserverconfigurationdbforpostgresql "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/flexibleserverconfiguration"
 	flexibleserverdatabase "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/flexibleserverdatabase"
 	flexibleserverfirewallruledbforpostgresql "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/flexibleserverfirewallrule"
@@ -312,6 +319,11 @@ import (
 	serverdbforpostgresql "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/server"
 	serverkey "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/serverkey"
 	virtualnetworkrule "github.com/upbound/provider-azure/v2/internal/controller/namespaced/dbforpostgresql/virtualnetworkrule"
+	virtualdesktopapplicationgroup "github.com/upbound/provider-azure/v2/internal/controller/namespaced/desktopvirtualization/virtualdesktopapplicationgroup"
+	virtualdesktophostpool "github.com/upbound/provider-azure/v2/internal/controller/namespaced/desktopvirtualization/virtualdesktophostpool"
+	virtualdesktophostpoolregistrationinfo "github.com/upbound/provider-azure/v2/internal/controller/namespaced/desktopvirtualization/virtualdesktophostpoolregistrationinfo"
+	virtualdesktopworkspace "github.com/upbound/provider-azure/v2/internal/controller/namespaced/desktopvirtualization/virtualdesktopworkspace"
+	virtualdesktopworkspaceapplicationgroupassociation "github.com/upbound/provider-azure/v2/internal/controller/namespaced/desktopvirtualization/virtualdesktopworkspaceapplicationgroupassociation"
 	iothub "github.com/upbound/provider-azure/v2/internal/controller/namespaced/devices/iothub"
 	iothubcertificate "github.com/upbound/provider-azure/v2/internal/controller/namespaced/devices/iothubcertificate"
 	iothubconsumergroup "github.com/upbound/provider-azure/v2/internal/controller/namespaced/devices/iothubconsumergroup"
@@ -346,6 +358,7 @@ import (
 	systemtopiceventsubscription "github.com/upbound/provider-azure/v2/internal/controller/namespaced/eventgrid/systemtopiceventsubscription"
 	topic "github.com/upbound/provider-azure/v2/internal/controller/namespaced/eventgrid/topic"
 	authorizationrule "github.com/upbound/provider-azure/v2/internal/controller/namespaced/eventhub/authorizationrule"
+	clustereventhub "github.com/upbound/provider-azure/v2/internal/controller/namespaced/eventhub/cluster"
 	consumergroup "github.com/upbound/provider-azure/v2/internal/controller/namespaced/eventhub/consumergroup"
 	eventhub "github.com/upbound/provider-azure/v2/internal/controller/namespaced/eventhub/eventhub"
 	eventhubnamespace "github.com/upbound/provider-azure/v2/internal/controller/namespaced/eventhub/eventhubnamespace"
@@ -394,7 +407,7 @@ import (
 	certificatekeyvault "github.com/upbound/provider-azure/v2/internal/controller/namespaced/keyvault/certificate"
 	certificatecontacts "github.com/upbound/provider-azure/v2/internal/controller/namespaced/keyvault/certificatecontacts"
 	certificateissuer "github.com/upbound/provider-azure/v2/internal/controller/namespaced/keyvault/certificateissuer"
-	key "github.com/upbound/provider-azure/v2/internal/controller/namespaced/keyvault/key"
+	keykeyvault "github.com/upbound/provider-azure/v2/internal/controller/namespaced/keyvault/key"
 	managedhardwaresecuritymodule "github.com/upbound/provider-azure/v2/internal/controller/namespaced/keyvault/managedhardwaresecuritymodule"
 	managedstorageaccount "github.com/upbound/provider-azure/v2/internal/controller/namespaced/keyvault/managedstorageaccount"
 	managedstorageaccountsastokendefinition "github.com/upbound/provider-azure/v2/internal/controller/namespaced/keyvault/managedstorageaccountsastokendefinition"
@@ -422,6 +435,7 @@ import (
 	apptriggerrecurrence "github.com/upbound/provider-azure/v2/internal/controller/namespaced/logic/apptriggerrecurrence"
 	appworkflow "github.com/upbound/provider-azure/v2/internal/controller/namespaced/logic/appworkflow"
 	aifoundry "github.com/upbound/provider-azure/v2/internal/controller/namespaced/machinelearningservices/aifoundry"
+	aifoundryproject "github.com/upbound/provider-azure/v2/internal/controller/namespaced/machinelearningservices/aifoundryproject"
 	computecluster "github.com/upbound/provider-azure/v2/internal/controller/namespaced/machinelearningservices/computecluster"
 	computeinstance "github.com/upbound/provider-azure/v2/internal/controller/namespaced/machinelearningservices/computeinstance"
 	synapsespark "github.com/upbound/provider-azure/v2/internal/controller/namespaced/machinelearningservices/synapsespark"
@@ -576,6 +590,10 @@ import (
 	loganalyticssavedsearch "github.com/upbound/provider-azure/v2/internal/controller/namespaced/operationalinsights/loganalyticssavedsearch"
 	workspaceoperationalinsights "github.com/upbound/provider-azure/v2/internal/controller/namespaced/operationalinsights/workspace"
 	loganalyticssolution "github.com/upbound/provider-azure/v2/internal/controller/namespaced/operationsmanagement/loganalyticssolution"
+	autonomousdatabase "github.com/upbound/provider-azure/v2/internal/controller/namespaced/oracle/autonomousdatabase"
+	autonomousdatabasebackup "github.com/upbound/provider-azure/v2/internal/controller/namespaced/oracle/autonomousdatabasebackup"
+	autonomousdatabaseclonefrombackup "github.com/upbound/provider-azure/v2/internal/controller/namespaced/oracle/autonomousdatabaseclonefrombackup"
+	autonomousdatabaseclonefromdatabase "github.com/upbound/provider-azure/v2/internal/controller/namespaced/oracle/autonomousdatabaseclonefromdatabase"
 	contactprofile "github.com/upbound/provider-azure/v2/internal/controller/namespaced/orbital/contactprofile"
 	spacecraft "github.com/upbound/provider-azure/v2/internal/controller/namespaced/orbital/spacecraft"
 	resourcepolicyremediation "github.com/upbound/provider-azure/v2/internal/controller/namespaced/policyinsights/resourcepolicyremediation"
@@ -637,6 +655,10 @@ import (
 	clusterservicefabric "github.com/upbound/provider-azure/v2/internal/controller/namespaced/servicefabric/cluster"
 	managedcluster "github.com/upbound/provider-azure/v2/internal/controller/namespaced/servicefabric/managedcluster"
 	springcloudconnection "github.com/upbound/provider-azure/v2/internal/controller/namespaced/servicelinker/springcloudconnection"
+	applicationloadbalancer "github.com/upbound/provider-azure/v2/internal/controller/namespaced/servicenetworking/applicationloadbalancer"
+	applicationloadbalancerfrontend "github.com/upbound/provider-azure/v2/internal/controller/namespaced/servicenetworking/applicationloadbalancerfrontend"
+	applicationloadbalancersecuritypolicy "github.com/upbound/provider-azure/v2/internal/controller/namespaced/servicenetworking/applicationloadbalancersecuritypolicy"
+	applicationloadbalancersubnetassociation "github.com/upbound/provider-azure/v2/internal/controller/namespaced/servicenetworking/applicationloadbalancersubnetassociation"
 	networkacl "github.com/upbound/provider-azure/v2/internal/controller/namespaced/signalrservice/networkacl"
 	servicesignalrservice "github.com/upbound/provider-azure/v2/internal/controller/namespaced/signalrservice/service"
 	signalrsharedprivatelinkresource "github.com/upbound/provider-azure/v2/internal/controller/namespaced/signalrservice/signalrsharedprivatelinkresource"
@@ -801,6 +823,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		tag.Setup,
 		user.Setup,
 		configuration.Setup,
+		key.Setup,
 		springcloudaccelerator.Setup,
 		springcloudactivedeployment.Setup,
 		springcloudapiportal.Setup,
@@ -837,6 +860,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		resourcepolicyexemption.Setup,
 		roleassignment.Setup,
 		roledefinition.Setup,
+		rolemanagementpolicy.Setup,
 		subscriptionpolicyassignment.Setup,
 		subscriptionpolicyexemption.Setup,
 		trustedaccessrolebinding.Setup,
@@ -935,6 +959,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		environmentdaprcomponent.Setup,
 		environmentstorage.Setup,
 		agentpool.Setup,
+		cacherule.Setup,
 		containerconnectedregistry.Setup,
 		credentialset.Setup,
 		registry.Setup,
@@ -971,6 +996,8 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		resourcegroupcostmanagementexport.Setup,
 		subscriptioncostmanagementexport.Setup,
 		customprovider.Setup,
+		grafana.Setup,
+		grafanamanagedprivateendpoint.Setup,
 		device.Setup,
 		accessconnector.Setup,
 		workspace.Setup,
@@ -1041,6 +1068,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		datashare.Setup,
 		flexibledatabase.Setup,
 		flexibleserver.Setup,
+		flexibleserveractivedirectoryadministrator.Setup,
 		flexibleserverconfiguration.Setup,
 		flexibleserverfirewallrule.Setup,
 		activedirectoryadministrator.Setup,
@@ -1048,7 +1076,8 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		database.Setup,
 		firewallrule.Setup,
 		flexibleserverdbforpostgresql.Setup,
-		flexibleserveractivedirectoryadministrator.Setup,
+		flexibleserveractivedirectoryadministratordbforpostgresql.Setup,
+		flexibleserverbackup.Setup,
 		flexibleserverconfigurationdbforpostgresql.Setup,
 		flexibleserverdatabase.Setup,
 		flexibleserverfirewallruledbforpostgresql.Setup,
@@ -1056,6 +1085,11 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		serverdbforpostgresql.Setup,
 		serverkey.Setup,
 		virtualnetworkrule.Setup,
+		virtualdesktopapplicationgroup.Setup,
+		virtualdesktophostpool.Setup,
+		virtualdesktophostpoolregistrationinfo.Setup,
+		virtualdesktopworkspace.Setup,
+		virtualdesktopworkspaceapplicationgroupassociation.Setup,
 		iothub.Setup,
 		iothubcertificate.Setup,
 		iothubconsumergroup.Setup,
@@ -1090,6 +1124,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		systemtopiceventsubscription.Setup,
 		topic.Setup,
 		authorizationrule.Setup,
+		clustereventhub.Setup,
 		consumergroup.Setup,
 		eventhub.Setup,
 		eventhubnamespace.Setup,
@@ -1138,7 +1173,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		certificatekeyvault.Setup,
 		certificatecontacts.Setup,
 		certificateissuer.Setup,
-		key.Setup,
+		keykeyvault.Setup,
 		managedhardwaresecuritymodule.Setup,
 		managedstorageaccount.Setup,
 		managedstorageaccountsastokendefinition.Setup,
@@ -1166,6 +1201,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		apptriggerrecurrence.Setup,
 		appworkflow.Setup,
 		aifoundry.Setup,
+		aifoundryproject.Setup,
 		computecluster.Setup,
 		computeinstance.Setup,
 		synapsespark.Setup,
@@ -1320,6 +1356,10 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		loganalyticssavedsearch.Setup,
 		workspaceoperationalinsights.Setup,
 		loganalyticssolution.Setup,
+		autonomousdatabase.Setup,
+		autonomousdatabasebackup.Setup,
+		autonomousdatabaseclonefrombackup.Setup,
+		autonomousdatabaseclonefromdatabase.Setup,
 		contactprofile.Setup,
 		spacecraft.Setup,
 		resourcepolicyremediation.Setup,
@@ -1381,6 +1421,10 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		clusterservicefabric.Setup,
 		managedcluster.Setup,
 		springcloudconnection.Setup,
+		applicationloadbalancer.Setup,
+		applicationloadbalancerfrontend.Setup,
+		applicationloadbalancersecuritypolicy.Setup,
+		applicationloadbalancersubnetassociation.Setup,
 		networkacl.Setup,
 		servicesignalrservice.Setup,
 		signalrsharedprivatelinkresource.Setup,
@@ -1551,6 +1595,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		tag.SetupGated,
 		user.SetupGated,
 		configuration.SetupGated,
+		key.SetupGated,
 		springcloudaccelerator.SetupGated,
 		springcloudactivedeployment.SetupGated,
 		springcloudapiportal.SetupGated,
@@ -1587,6 +1632,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		resourcepolicyexemption.SetupGated,
 		roleassignment.SetupGated,
 		roledefinition.SetupGated,
+		rolemanagementpolicy.SetupGated,
 		subscriptionpolicyassignment.SetupGated,
 		subscriptionpolicyexemption.SetupGated,
 		trustedaccessrolebinding.SetupGated,
@@ -1685,6 +1731,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		environmentdaprcomponent.SetupGated,
 		environmentstorage.SetupGated,
 		agentpool.SetupGated,
+		cacherule.SetupGated,
 		containerconnectedregistry.SetupGated,
 		credentialset.SetupGated,
 		registry.SetupGated,
@@ -1721,6 +1768,8 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		resourcegroupcostmanagementexport.SetupGated,
 		subscriptioncostmanagementexport.SetupGated,
 		customprovider.SetupGated,
+		grafana.SetupGated,
+		grafanamanagedprivateendpoint.SetupGated,
 		device.SetupGated,
 		accessconnector.SetupGated,
 		workspace.SetupGated,
@@ -1791,6 +1840,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		datashare.SetupGated,
 		flexibledatabase.SetupGated,
 		flexibleserver.SetupGated,
+		flexibleserveractivedirectoryadministrator.SetupGated,
 		flexibleserverconfiguration.SetupGated,
 		flexibleserverfirewallrule.SetupGated,
 		activedirectoryadministrator.SetupGated,
@@ -1798,7 +1848,8 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		database.SetupGated,
 		firewallrule.SetupGated,
 		flexibleserverdbforpostgresql.SetupGated,
-		flexibleserveractivedirectoryadministrator.SetupGated,
+		flexibleserveractivedirectoryadministratordbforpostgresql.SetupGated,
+		flexibleserverbackup.SetupGated,
 		flexibleserverconfigurationdbforpostgresql.SetupGated,
 		flexibleserverdatabase.SetupGated,
 		flexibleserverfirewallruledbforpostgresql.SetupGated,
@@ -1806,6 +1857,11 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		serverdbforpostgresql.SetupGated,
 		serverkey.SetupGated,
 		virtualnetworkrule.SetupGated,
+		virtualdesktopapplicationgroup.SetupGated,
+		virtualdesktophostpool.SetupGated,
+		virtualdesktophostpoolregistrationinfo.SetupGated,
+		virtualdesktopworkspace.SetupGated,
+		virtualdesktopworkspaceapplicationgroupassociation.SetupGated,
 		iothub.SetupGated,
 		iothubcertificate.SetupGated,
 		iothubconsumergroup.SetupGated,
@@ -1840,6 +1896,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		systemtopiceventsubscription.SetupGated,
 		topic.SetupGated,
 		authorizationrule.SetupGated,
+		clustereventhub.SetupGated,
 		consumergroup.SetupGated,
 		eventhub.SetupGated,
 		eventhubnamespace.SetupGated,
@@ -1888,7 +1945,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		certificatekeyvault.SetupGated,
 		certificatecontacts.SetupGated,
 		certificateissuer.SetupGated,
-		key.SetupGated,
+		keykeyvault.SetupGated,
 		managedhardwaresecuritymodule.SetupGated,
 		managedstorageaccount.SetupGated,
 		managedstorageaccountsastokendefinition.SetupGated,
@@ -1916,6 +1973,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		apptriggerrecurrence.SetupGated,
 		appworkflow.SetupGated,
 		aifoundry.SetupGated,
+		aifoundryproject.SetupGated,
 		computecluster.SetupGated,
 		computeinstance.SetupGated,
 		synapsespark.SetupGated,
@@ -2070,6 +2128,10 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		loganalyticssavedsearch.SetupGated,
 		workspaceoperationalinsights.SetupGated,
 		loganalyticssolution.SetupGated,
+		autonomousdatabase.SetupGated,
+		autonomousdatabasebackup.SetupGated,
+		autonomousdatabaseclonefrombackup.SetupGated,
+		autonomousdatabaseclonefromdatabase.SetupGated,
 		contactprofile.SetupGated,
 		spacecraft.SetupGated,
 		resourcepolicyremediation.SetupGated,
@@ -2131,6 +2193,10 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		clusterservicefabric.SetupGated,
 		managedcluster.SetupGated,
 		springcloudconnection.SetupGated,
+		applicationloadbalancer.SetupGated,
+		applicationloadbalancerfrontend.SetupGated,
+		applicationloadbalancersecuritypolicy.SetupGated,
+		applicationloadbalancersubnetassociation.SetupGated,
 		networkacl.SetupGated,
 		servicesignalrservice.SetupGated,
 		signalrsharedprivatelinkresource.SetupGated,

@@ -228,8 +228,10 @@ func oidcAuth(pcSpec *namespacedv1beta1.ProviderConfigSpec, ps *terraform.Setup)
 	ps.Configuration[keyTenantID] = *pcSpec.TenantID
 	ps.Configuration[keyClientID] = *pcSpec.ClientID
 	ps.Configuration[keyUseOIDC] = "true"
+	if pcSpec.Environment != nil {
+		ps.Configuration[keyEnvironment] = *pcSpec.Environment
+	}
 	return nil
-
 }
 
 func oidcTokenRequestAuth(ctx context.Context, pcSpec *namespacedv1beta1.ProviderConfigSpec, ps *terraform.Setup, c client.Client) error {
@@ -293,8 +295,10 @@ func upboundAuth(pcSpec *namespacedv1beta1.ProviderConfigSpec, ps *terraform.Set
 	ps.Configuration[keyTenantID] = *pcSpec.TenantID
 	ps.Configuration[keyClientID] = *pcSpec.ClientID
 	ps.Configuration[keyUseOIDC] = "true"
+	if pcSpec.Environment != nil {
+		ps.Configuration[keyEnvironment] = *pcSpec.Environment
+	}
 	return nil
-
 }
 
 func legacyToModernProviderConfigSpec(pc *clusterv1beta1.ProviderConfig) (*namespacedv1beta1.ProviderConfigSpec, error) {
@@ -327,7 +331,7 @@ func enrichLocalServiceAccountRefs(pc *namespacedv1beta1.ProviderConfig, mg xpre
 
 func resolveProviderConfig(ctx context.Context, crClient client.Client, mg xpresource.Managed) (*namespacedv1beta1.ProviderConfigSpec, error) {
 	switch managed := mg.(type) {
-	case xpresource.LegacyManaged:
+	case xpresource.LegacyManaged: //nolint:staticcheck // still need to support LegacyManaged resources
 		return resolveProviderConfigLegacy(ctx, crClient, managed)
 	case xpresource.ModernManaged:
 		return resolveProviderConfigModern(ctx, crClient, managed)
@@ -336,7 +340,7 @@ func resolveProviderConfig(ctx context.Context, crClient client.Client, mg xpres
 	}
 }
 
-func resolveProviderConfigLegacy(ctx context.Context, client client.Client, mg xpresource.LegacyManaged) (*namespacedv1beta1.ProviderConfigSpec, error) {
+func resolveProviderConfigLegacy(ctx context.Context, client client.Client, mg xpresource.LegacyManaged) (*namespacedv1beta1.ProviderConfigSpec, error) { //nolint:staticcheck // still need to support LegacyManaged resources
 	configRef := mg.GetProviderConfigReference()
 	if configRef == nil {
 		return nil, errors.New(errNoProviderConfig)

@@ -106,6 +106,9 @@ type BindInitParameters struct {
 
 	// The Bind Distinguished Name (DN) identity to be used in the secure LDAP connection.
 	Dn *string `json:"dn,omitempty" tf:"dn,omitempty"`
+
+	// The password of the Active Directory domain administrator.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 }
 
 type BindObservation struct {
@@ -192,6 +195,9 @@ type DirectoryActiveDirectoryInitParameters struct {
 
 	// The username of the Active Directory domain administrator.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+
+	// The password of the Active Directory domain administrator.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 }
 
 type DirectoryActiveDirectoryObservation struct {
@@ -611,9 +617,10 @@ type HPCCacheStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
+// +kubebuilder:deprecatedversion:warning="This API version is deprecated. Deprecated since v2.6.0."
 
 // HPCCache is the Schema for the HPCCaches API. Manages a HPC Cache.
+// Deprecated: This API version (v1beta1) has been deprecated in release v2.6.0.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

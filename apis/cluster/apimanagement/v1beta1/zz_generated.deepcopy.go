@@ -20170,9 +20170,24 @@ func (in *SubscriptionInitParameters) DeepCopyInto(out *SubscriptionInitParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.APIIDRef != nil {
+		in, out := &in.APIIDRef, &out.APIIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.APIIDSelector != nil {
+		in, out := &in.APIIDSelector, &out.APIIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.AllowTracing != nil {
 		in, out := &in.AllowTracing, &out.AllowTracing
 		*out = new(bool)
+		**out = **in
+	}
+	if in.DisplayName != nil {
+		in, out := &in.DisplayName, &out.DisplayName
+		*out = new(string)
 		**out = **in
 	}
 	if in.PrimaryKeySecretRef != nil {
@@ -20362,6 +20377,11 @@ func (in *SubscriptionObservation) DeepCopyInto(out *SubscriptionObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.DisplayName != nil {
+		in, out := &in.DisplayName, &out.DisplayName
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -20412,6 +20432,16 @@ func (in *SubscriptionParameters) DeepCopyInto(out *SubscriptionParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.APIIDRef != nil {
+		in, out := &in.APIIDRef, &out.APIIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.APIIDSelector != nil {
+		in, out := &in.APIIDSelector, &out.APIIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.APIManagementName != nil {
 		in, out := &in.APIManagementName, &out.APIManagementName
 		*out = new(string)
@@ -20430,6 +20460,11 @@ func (in *SubscriptionParameters) DeepCopyInto(out *SubscriptionParameters) {
 	if in.AllowTracing != nil {
 		in, out := &in.AllowTracing, &out.AllowTracing
 		*out = new(bool)
+		**out = **in
+	}
+	if in.DisplayName != nil {
+		in, out := &in.DisplayName, &out.DisplayName
+		*out = new(string)
 		**out = **in
 	}
 	if in.PrimaryKeySecretRef != nil {

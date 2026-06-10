@@ -37,6 +37,9 @@ type EnvironmentVariableInitParameters struct {
 	// Specifies the name of the environment variable.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Specifies the secure value of the environment variable.
+	SecureValueSecretRef *v1.SecretKeySelector `json:"secureValueSecretRef,omitempty" tf:"-"`
+
 	// Specifies the value of the environment variable.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
@@ -325,6 +328,9 @@ type ResourceDeploymentScriptAzureCliParameters struct {
 
 type StorageAccountInitParameters struct {
 
+	// Specifies the storage account access key.
+	KeySecretRef v1.SecretKeySelector `json:"keySecretRef" tf:"-"`
+
 	// Specifies the storage account name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
@@ -371,9 +377,10 @@ type ResourceDeploymentScriptAzureCliStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
+// +kubebuilder:deprecatedversion:warning="This API version is deprecated. Deprecated since v2.6.0."
 
 // ResourceDeploymentScriptAzureCli is the Schema for the ResourceDeploymentScriptAzureClis API. Manages a Resource Deployment Script of Azure Cli.
+// Deprecated: This API version (v1beta1) has been deprecated in release v2.6.0.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

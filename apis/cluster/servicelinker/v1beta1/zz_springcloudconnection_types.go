@@ -15,6 +15,9 @@ import (
 
 type AuthenticationInitParameters struct {
 
+	// Service principal certificate for servicePrincipal auth. Should be specified when type is set to servicePrincipalCertificate.
+	CertificateSecretRef *v1.SecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
+
 	// Client ID for userAssignedIdentity or servicePrincipal auth. Should be specified when type is set to servicePrincipalSecret or servicePrincipalCertificate. When type is set to userAssignedIdentity, client_id and subscription_id should be either both specified or both not specified.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
@@ -23,6 +26,9 @@ type AuthenticationInitParameters struct {
 
 	// Principal ID for servicePrincipal auth. Should be specified when type is set to servicePrincipalSecret or servicePrincipalCertificate.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// Password or account key for secret auth. secret and name should be either both specified or both not specified when type is set to secret.
+	SecretSecretRef *v1.SecretKeySelector `json:"secretSecretRef,omitempty" tf:"-"`
 
 	// Subscription ID for userAssignedIdentity. subscription_id and client_id should be either both specified or both not specified.
 	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
@@ -246,9 +252,10 @@ type SpringCloudConnectionStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
+// +kubebuilder:deprecatedversion:warning="This API version is deprecated. Deprecated since v2.6.0."
 
 // SpringCloudConnection is the Schema for the SpringCloudConnections API. Manages a service connector for spring cloud app.
+// Deprecated: This API version (v1beta1) has been deprecated in release v2.6.0.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

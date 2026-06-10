@@ -35,6 +35,7 @@ import (
 	v1beta1cosmosdb "github.com/upbound/provider-azure/v2/apis/namespaced/cosmosdb/v1beta1"
 	v1beta1costmanagement "github.com/upbound/provider-azure/v2/apis/namespaced/costmanagement/v1beta1"
 	v1beta1customproviders "github.com/upbound/provider-azure/v2/apis/namespaced/customproviders/v1beta1"
+	v1beta1dashboard "github.com/upbound/provider-azure/v2/apis/namespaced/dashboard/v1beta1"
 	v1beta1databoxedge "github.com/upbound/provider-azure/v2/apis/namespaced/databoxedge/v1beta1"
 	v1beta1databricks "github.com/upbound/provider-azure/v2/apis/namespaced/databricks/v1beta1"
 	v1beta1datafactory "github.com/upbound/provider-azure/v2/apis/namespaced/datafactory/v1beta1"
@@ -43,6 +44,7 @@ import (
 	v1beta1datashare "github.com/upbound/provider-azure/v2/apis/namespaced/datashare/v1beta1"
 	v1beta1dbformysql "github.com/upbound/provider-azure/v2/apis/namespaced/dbformysql/v1beta1"
 	v1beta1dbforpostgresql "github.com/upbound/provider-azure/v2/apis/namespaced/dbforpostgresql/v1beta1"
+	v1beta1desktopvirtualization "github.com/upbound/provider-azure/v2/apis/namespaced/desktopvirtualization/v1beta1"
 	v1beta1devices "github.com/upbound/provider-azure/v2/apis/namespaced/devices/v1beta1"
 	v1beta1deviceupdate "github.com/upbound/provider-azure/v2/apis/namespaced/deviceupdate/v1beta1"
 	v1beta1devtestlab "github.com/upbound/provider-azure/v2/apis/namespaced/devtestlab/v1beta1"
@@ -72,6 +74,7 @@ import (
 	v1beta1notificationhubs "github.com/upbound/provider-azure/v2/apis/namespaced/notificationhubs/v1beta1"
 	v1beta1operationalinsights "github.com/upbound/provider-azure/v2/apis/namespaced/operationalinsights/v1beta1"
 	v1beta1operationsmanagement "github.com/upbound/provider-azure/v2/apis/namespaced/operationsmanagement/v1beta1"
+	v1beta1oracle "github.com/upbound/provider-azure/v2/apis/namespaced/oracle/v1beta1"
 	v1beta1orbital "github.com/upbound/provider-azure/v2/apis/namespaced/orbital/v1beta1"
 	v1beta1policyinsights "github.com/upbound/provider-azure/v2/apis/namespaced/policyinsights/v1beta1"
 	v1beta1portal "github.com/upbound/provider-azure/v2/apis/namespaced/portal/v1beta1"
@@ -86,6 +89,7 @@ import (
 	v1beta1servicebus "github.com/upbound/provider-azure/v2/apis/namespaced/servicebus/v1beta1"
 	v1beta1servicefabric "github.com/upbound/provider-azure/v2/apis/namespaced/servicefabric/v1beta1"
 	v1beta1servicelinker "github.com/upbound/provider-azure/v2/apis/namespaced/servicelinker/v1beta1"
+	v1beta1servicenetworking "github.com/upbound/provider-azure/v2/apis/namespaced/servicenetworking/v1beta1"
 	v1beta1signalrservice "github.com/upbound/provider-azure/v2/apis/namespaced/signalrservice/v1beta1"
 	v1beta1solutions "github.com/upbound/provider-azure/v2/apis/namespaced/solutions/v1beta1"
 	v1beta1spring "github.com/upbound/provider-azure/v2/apis/namespaced/spring/v1beta1"
@@ -128,6 +132,7 @@ func init() {
 		v1beta1cosmosdb.SchemeBuilder.AddToScheme,
 		v1beta1costmanagement.SchemeBuilder.AddToScheme,
 		v1beta1customproviders.SchemeBuilder.AddToScheme,
+		v1beta1dashboard.SchemeBuilder.AddToScheme,
 		v1beta1databoxedge.SchemeBuilder.AddToScheme,
 		v1beta1databricks.SchemeBuilder.AddToScheme,
 		v1beta1datafactory.SchemeBuilder.AddToScheme,
@@ -136,6 +141,7 @@ func init() {
 		v1beta1datashare.SchemeBuilder.AddToScheme,
 		v1beta1dbformysql.SchemeBuilder.AddToScheme,
 		v1beta1dbforpostgresql.SchemeBuilder.AddToScheme,
+		v1beta1desktopvirtualization.SchemeBuilder.AddToScheme,
 		v1beta1devices.SchemeBuilder.AddToScheme,
 		v1beta1deviceupdate.SchemeBuilder.AddToScheme,
 		v1beta1devtestlab.SchemeBuilder.AddToScheme,
@@ -165,6 +171,7 @@ func init() {
 		v1beta1notificationhubs.SchemeBuilder.AddToScheme,
 		v1beta1operationalinsights.SchemeBuilder.AddToScheme,
 		v1beta1operationsmanagement.SchemeBuilder.AddToScheme,
+		v1beta1oracle.SchemeBuilder.AddToScheme,
 		v1beta1orbital.SchemeBuilder.AddToScheme,
 		v1beta1policyinsights.SchemeBuilder.AddToScheme,
 		v1beta1portal.SchemeBuilder.AddToScheme,
@@ -179,6 +186,7 @@ func init() {
 		v1beta1servicebus.SchemeBuilder.AddToScheme,
 		v1beta1servicefabric.SchemeBuilder.AddToScheme,
 		v1beta1servicelinker.SchemeBuilder.AddToScheme,
+		v1beta1servicenetworking.SchemeBuilder.AddToScheme,
 		v1beta1signalrservice.SchemeBuilder.AddToScheme,
 		v1beta1solutions.SchemeBuilder.AddToScheme,
 		v1beta1spring.SchemeBuilder.AddToScheme,

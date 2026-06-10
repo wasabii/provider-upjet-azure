@@ -133,6 +133,9 @@ type ActiveDirectoryInitParameters struct {
 
 	// The Username of Active Directory Domain Administrator.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+
+	// The password associated with the username.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 }
 
 type ActiveDirectoryObservation struct {
@@ -333,9 +336,10 @@ type AccountStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
+// +kubebuilder:deprecatedversion:warning="This API version is deprecated. Deprecated since v2.6.0."
 
 // Account is the Schema for the Accounts API. Manages a NetApp Account.
+// Deprecated: This API version (v1beta1) has been deprecated in release v2.6.0.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
