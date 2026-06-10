@@ -168,6 +168,19 @@ spec:
                   rule: '!has(self.exponentialFailureRateLimiter) || !has(self.exponentialFailureRateLimiter.baseDelay)
                     || has(self.exponentialFailureRateLimiter.maxDelay) || duration(self.exponentialFailureRateLimiter.baseDelay)
                     <= duration(''60s'')'
+              serviceAccountRef:
+                description: ServiceAccount within the same namespace that should
+                  be used to derive the OIDC token.
+                properties:
+                  name:
+                    description: Name of the service account.
+                    type: string
+                  namespace:
+                    description: Namespace of the service account.
+                    type: string
+                required:
+                - name
+                type: object
               storageUseAzureAD:
                 description: |-
                   StorageUseAzureAD configures Provider to use AzureAD

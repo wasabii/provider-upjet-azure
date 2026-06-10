@@ -174,6 +174,7 @@ func (in *ProviderConfigSpec) DeepCopyInto(out *ProviderConfigSpec) {
 		in, out := &in.ServiceAccountRef, &out.ServiceAccountRef
 		*out = new(ProviderServiceAccountReference)
 		(*in).DeepCopyInto(*out)
+	}
 	if in.StorageUseAzureAD != nil {
 		in, out := &in.StorageUseAzureAD, &out.StorageUseAzureAD
 		*out = new(bool)
